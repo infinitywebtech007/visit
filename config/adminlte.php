@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => 'MeetPass',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => '/logo/MeetPass1.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -84,13 +84,15 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '/logo/MeetPass1.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 100,
+            'logo' => '-',
+
+            'height' => 100,
         ],
     ],
 
@@ -113,7 +115,7 @@ return [
         'enabled' => true,
         'mode' => 'cwrapper',
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => '/logo/M.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__wobble',
             'width' => 60,
@@ -317,11 +319,17 @@ return [
         // ],
         [
             'text' => 'Visits',
-            'url' => 'vissits',
-            'can' => 'manage-visits',
+            'url' => 'visits',
+            // 'can' => 'manage-visits',
             'icon' => 'fa fa-fw fa-list text-info',
             'label' => 4,
             'label_color' => 'success',
+        ],
+        [
+            'text' => 'Visitors',
+            'url' => 'visitors',
+            'icon' => 'fa fa-fw fa-user text-person',
+
         ],
         [
             'text' => 'Employees',
