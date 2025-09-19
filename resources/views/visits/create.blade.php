@@ -3,17 +3,12 @@
 @section('content')
 <div class="container">
     <h1>Create Visit</h1>
-
     <div class="row">
         <div class="col-sm-12 col-md-6">
             <div class="mb-3">
                 <label for="visitor_id" class="form-label">Visitor</label>
-                <select name="visitor_id" id="visitor_id" class="form-control" required>
-                    <option value="">Select Visitor</option>
-                    @foreach($visitors as $visitor)
-                        <option value="{{ $visitor->id }}">{{ $visitor->name }}</option>
-                    @endforeach
-                </select>
+                 @livewire('visitors')
+
             </div>
         </div>
 
