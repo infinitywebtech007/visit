@@ -91,4 +91,39 @@
     </div>
 
 </div>
+
+  <h2>Camera Capture</h2>
+  <video id="video" width="640" height="480" autoplay></video><br>
+  <button id="capture">Take Photo</button>
+  <canvas id="canvas" width="640" height="480"></canvas>
+  <img id="photo" alt="Captured photo will appear here">
+  
+  {{-- <script src="script.js"></script> --}}
+ <script>
+// Get DOM elements
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const captureButton = document.getElementById('capture');
+const photo = document.getElementById('photo');
+
+// Access the camera
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => {
+    video.srcObject = stream;
+  })
+  .catch(err => {
+    console.error("Error accessing camera: ", err);
+    alert("Camera access denied or not available.");
+  });
+
+// Capture photo when button is clicked
+captureButton.addEventListener('click', () => {
+  const context = canvas.getContext('2d');
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  
+  // Convert canvas to data URL and display in <img>
+  const dataUrl = canvas.toDataURL('image/png');
+  photo.src = dataUrl;
+});   
+ </script>
 @endsection
