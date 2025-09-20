@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Visitor;
 use App\Http\Requests\StoreVisitorRequest;
 use App\Http\Requests\UpdateVisitorRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
@@ -31,7 +32,24 @@ class VisitorController extends Controller
      */
     public function store(StoreVisitorRequest $request)
     {
-        Visitor::create($request->validated());
+        $visitor = Visitor::create($request->validated());
+
+
+        if ($request->filled('webcam_photo')) {
+            $data = $request->input('webcam_photo');
+
+            // Extract base64 string (remove "data:image/jpeg;base64,")
+            [$type, $data] = explode(';', $data);
+            [$blank, $data] = explode(',', $data);
+
+            $decodedImage = base64_decode($data);
+            $filename = time() . '_webcam.jpg';
+            Storage::put('visitors/id_proofs/' . $filename, $decodedImage);
+            $path = public_path('uploads/visitors/' . $filename);
+            file_put_contents($path, $decodedImage);
+            $visitor->photo_url = $path;
+        }
+
         return redirect()->route('visitors.index')->with('success', 'Visitor created successfully.');
     }
 
