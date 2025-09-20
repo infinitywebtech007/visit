@@ -43,12 +43,30 @@ class VisitorController extends Controller
             [$blank, $data] = explode(',', $data);
 
             $decodedImage = base64_decode($data);
-            $filename = time() . '_webcam.jpg';
-            Storage::put('visitors/id_proofs/' . $filename, $decodedImage);
-            $path = public_path('uploads/visitors/' . $filename);
-            file_put_contents($path, $decodedImage);
-            $visitor->photo_url = $path;
+            $filename = time() . 'webcam_photo.jpg';
+            Storage::put('visitors/webcam_photo/' . $filename, $decodedImage);
+            // $path = public_path('uploads/visitors/' . $filename);
+            // file_put_contents($path, $decodedImage);
+            $visitor->photo_url = $filename;
+            $visitor->save();
         }
+
+        if ($request->filled('webcam_id_photo')) {
+            $data = $request->input('webcam_id_photo');
+
+            // Extract base64 string (remove "data:image/jpeg;base64,")
+            [$type, $data] = explode(';', $data);
+            [$blank, $data] = explode(',', $data);
+
+            $decodedImage = base64_decode($data);
+            $filename = time() . 'webcam_id_photo.jpg';
+            Storage::put('visitors/webcam_id_photo/' . $filename, $decodedImage);
+            // $path = public_path('uploads/visitors/' . $filename);
+            // file_put_contents($path, $decodedImage);
+            $visitor->id_proof_img =  $filename;
+            $visitor->save();
+        }
+
 
         return redirect()->route('visitors.index')->with('success', 'Visitor created successfully.');
     }
@@ -86,4 +104,28 @@ class VisitorController extends Controller
         $visitor->delete();
         return redirect()->route('visitors.index')->with('success', 'Visitor deleted successfully.');
     }
+
+    public function viewPhoto($filename)
+    {
+        if (!auth()->check()) abort(403);
+
+        $path = storage_path('visitors/webcam_photo/' . $filename);
+
+        if (!file_exists($path)) abort(404);
+
+        return response()->file($path);
+    }
+
+    public function viewID ($filename)
+    {
+        if (!auth()->check()) abort(403);
+
+        $path = storage_path('visitors/webcam_id_photo/' . $filename);
+
+        if (!file_exists($path)) abort(404);
+
+        return response()->file($path);
+    }
+
+    
 }
