@@ -12,6 +12,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+// Test
+
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
