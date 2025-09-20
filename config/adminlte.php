@@ -337,6 +337,12 @@ return [
             'icon' => 'fa fa-fw fa-user text-info',
 
         ],
+        [
+            'text' => 'Users',
+            'url' => 'users',
+            'icon' => 'fa fa-fw fa-users text-success',
+
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'Settings',
