@@ -4,9 +4,7 @@
 
 @section('title')
     {{ config('adminlte.title') }}
-    @hasSection('subtitle')
-        | @yield('subtitle')
-    @endif
+    @hasSection('subtitle') | @yield('subtitle') @endif
 @stop
 
 {{-- Extend and customize the page content header --}}
@@ -66,17 +64,17 @@
 
 
                 const toastHTML = `
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 1rem; right: 1rem; min-width: 250px; z-index: 1060;">
-        <div class="toast-header bg-${toastType} text-white">
-            <strong class="mr-auto">Notification</strong>
-            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">
-            ${toastMessage}
-        </div>
-    </div>`;
+                    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" style="position: fixed; top: 1rem; right: 1rem; min-width: 250px; z-index: 1060;">
+                        <div class="toast-header bg-${toastType} text-white">
+                            <strong class="mr-auto">Notification</strong>
+                            <button type="button" class="ml-2 mb-1 close text-white" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            ${toastMessage}
+                        </div>
+                    </div>`;
                 document.body.insertAdjacentHTML('beforeend', toastHTML);
                 const toastElement = document.querySelector('.toast');
                 const toast = new bootstrap.Toast(toastElement);
@@ -85,25 +83,11 @@
 
         });
     </script>
+    @livewireScripts
 @endpush
-
-@livewireScripts
 
 {{-- Add common CSS customizations --}}
 
 @push('css')
-    <style type="text/css">
-        {{-- You can add AdminLTE customizations here --}}
-        /*
-        .card-header {
-            border-bottom: none;
-        }
-        .card-title {
-            font-weight: 600;
-        }
-        */
-    </style>
-@endpush
-
 @livewireStyles
-
+@endpush
