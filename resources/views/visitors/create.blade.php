@@ -376,10 +376,10 @@
 
                                     <div class="form-group">
                                         <label for="email">
-                                            <i class="fas fa-envelope"></i> Email Address <span class="text-danger">*</span>
+                                            <i class="fas fa-envelope"></i> Email Address
                                         </label>
                                         <input type="email" name="email" id="email" class="form-control"
-                                               value="{{ old('email') }}" required placeholder="visitor@example.com">
+                                               value="{{ old('email') }}"  placeholder="visitor@example.com">
                                     </div>
 
                                     <div class="form-group">
@@ -711,19 +711,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = document.getElementById('name').value.trim();
         const email = document.getElementById('email').value.trim();
 
-        if (!name || !email) {
+        if (!name) {
             e.preventDefault();
             alert('Please fill in all required fields.');
             return false;
         }
 
-        // Email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            e.preventDefault();
-            alert('Please enter a valid email address.');
-            return false;
+        if(email){
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                e.preventDefault();
+                alert('Please enter a valid email address.');
+                return false;
+            }
         }
+        // Email validation
     });
 });
 </script>
