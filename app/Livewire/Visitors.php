@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Visitor;
 use Livewire\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class Visitors extends Component
 {
@@ -22,6 +23,9 @@ class Visitors extends Component
     public $photo_url = '';
     public $id_proof = '';
     public $id_proof_img = '';
+
+    public $webcam_photo = '';
+    public $webcam_id_photo = '';
 
     public function mount()
     {
@@ -141,5 +145,37 @@ class Visitors extends Component
             'id_proof' => $this->id_proof,
             'id_proof_img' => $this->id_proof_img,
         ]);
-}
+       if (($this->webcam_photo)) {
+            $data = $this->input('webcam_photo');
+
+            // Extract base64 string (remove "data:image/jpeg;base64,")
+            [$type, $data] = explode(';', $data);
+            [$blank, $data] = explode(',', $data);
+
+            $decodedImage = base64_decode($data);
+            $filename = time() . 'webcam_photo.jpg';
+            Storage::put('visitors/webcam_photo/' . $filename, $decodedImage);
+            // $path = public_path('uploads/visitors/' . $filename);
+            // file_put_contents($path, $decodedImage);
+            $visitor->photo_url = $filename;
+            $visitor->save();
+        }
+
+        if (($this->webcam_id_photo)) {
+            $data = $this->input('webcam_id_photo');
+
+            // Extract base64 string (remove "data:image/jpeg;base64,")
+            [$type, $data] = explode(';', $data);
+            [$blank, $data] = explode(',', $data);
+
+            $decodedImage = base64_decode($data);
+            $filename = time() . 'webcam_id_photo.jpg';
+            Storage::put('visitors/webcam_id_photo/' . $filename, $decodedImage);
+            // $path = public_path('uploads/visitors/' . $filename);
+            // file_put_contents($path, $decodedImage);
+            $visitor->id_proof_img =  $filename;
+            $visitor->save();
+        }
+        $this->dispatch('visitor-added');
+    }
 }
