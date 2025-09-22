@@ -142,3 +142,4 @@ class Visitors extends Component
             'id_proof_img' => $this->id_proof_img,
         ]);
 }
+}

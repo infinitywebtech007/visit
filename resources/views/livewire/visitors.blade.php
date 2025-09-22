@@ -919,5 +919,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // Email validation
     });
 });
-</script>   
+</script>
 </div>
