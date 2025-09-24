@@ -14,7 +14,7 @@
             <tr>
                 <th>ID</th>
                 <th>Visitor</th>
-                <th>Attendant</th>
+                <th>Employee</th>
                 <th>Purpose</th>
                 <th>HOD</th>
                 <th>Prebooked</th>
@@ -27,7 +27,7 @@
             <tr>
                 <td>{{ $visit->id }}</td>
                 <td>{{ $visit->visitor->name ?? 'N/A' }}</td>
-                <td>{{ $visit->attendant->name ?? 'N/A' }}</td>
+                <td>{{ $visit->employee->user->name ?? 'N/A' }}</td>
                 <td>{{ $visit->purpose }}</td>
                 <td>{{ $visit->HOD }}</td>
                 <td>{{ $visit->prebooked ? 'Yes' : 'No' }}</td>

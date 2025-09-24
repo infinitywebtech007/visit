@@ -26,8 +26,8 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <label for="attendant" class="form-label">Attendant</label>
-                    <select name="attendant" id="attendant" class="form-control" required>
+                    <label for="attendant" class="form-label">Employee</label>
+                    <select name="employee_id" id="attendant" class="form-control" required>
                         <option value="">Select Attendant</option>
                         @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->user->name }}</option>
@@ -39,15 +39,7 @@
                     <input type="text" name="purpose" id="purpose" class="form-control"
                         value="{{ old('purpose') }}">
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <label for="HOD" class="form-label">HOD</label>
-                    <select type="text" name="HOD" id="HOD" class="form-control"
-                        value="{{ old('HOD') }}">
-                        @foreach ($employees ??[] as $employee)
-                            <option value="{{ $employee->id }}"> {{ $employee->user->name }} </option>
-                        @endforeach
-                    </select>
-                </div>
+p --}}
                 {{-- <div class="col-sm-12 col-md-6 col-lg-4 form-check">
                     <label for="&nbsp" class="label">&nbsp</label>
                     <input type="checkbox" name="prebooked" id="prebooked" class="form-check-input" value="1"

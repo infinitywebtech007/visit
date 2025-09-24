@@ -15,7 +15,7 @@ class VisitController extends Controller
      */
     public function index()
     {
-        $visits = Visit::with('visitor', 'attendant')->get();
+        $visits = Visit::with('visitor', 'employee')->get();
         return view('visits.index', compact('visits'));
     }
 
@@ -43,7 +43,7 @@ class VisitController extends Controller
      */
     public function show(Visit $visit)
     {
-        $visit->load('visitor', 'attendant');
+        $visit->load('visitor', 'employee');
         return view('visits.show', compact('visit'));
     }
 

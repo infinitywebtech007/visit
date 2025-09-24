@@ -12,7 +12,7 @@ class Visit extends Model
 
     protected $fillable = [
         'visitor_id',
-        'attendant',
+        'employee_id',
         'purpose',
         'HOD',
         'prebooked',
@@ -23,8 +23,16 @@ class Visit extends Model
         return $this->belongsTo(Visitor::class);
     }
 
+
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function manager()
+    {
+        return $this->belongsTo(Employee::class,'HOD','id');
+    }
+
+
 }
