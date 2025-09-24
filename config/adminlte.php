@@ -322,8 +322,8 @@ return [
             'url' => 'visits',
             // 'can' => 'manage-visits',
             'icon' => 'fa fa-fw fa-list text-info',
-            'label' => 4,
-            'label_color' => 'success',
+            // 'label' => 4,
+            // 'label_color' => 'success',
         ],
         [
             'text' => 'Visitors',
