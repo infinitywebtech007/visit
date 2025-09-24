@@ -8,18 +8,25 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="mb-3">
-                        <label for="visitor_id" class="label">Visitor Number</label>
-                        <input type="text" name="visitor_number" id="visitor_number" class="form-control" v-model="visitorNumber" @input="filterVisitorsByNumber" >
+                       <label for="visitor_id" class="label">Visitor Number</label>
+                        <input type="text" 
+                               name="visitor_number" 
+                               id="visitor_number" 
+                               class="form-control" 
+                               v-model="visitorNumber" 
+                               @input="handleVisitorNumberInput"
+                               maxlength="10"
+                               pattern="[0-9]{10}"
+                               placeholder="Enter 10-digit mobile number">
+                        <small v-if="visitorNumberError" class="text-danger">@{{ visitorNumberError }}</small>
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="mb-3">
                         <label for="visitor_id" class="label">Visitor</label>
-                        <select name="visitor_id" class="form-control" id="visitor_id" v-model="selectedVisitor" >
+                        <select name="visitor_id" class="form-control" id="visitor_id" v-model="selectedVisitor">
                             <option value="">Select Visitor</option>
-                            <option v-for="visitor in filteredVisitors" 
-                                    :key="visitor.id" 
-                                    :value="visitor.id">
+                            <option v-for="visitor in filteredVisitors" :key="visitor.id" :value="visitor.id">
                                 @{{ visitor.name }} - @{{ visitor.phone || visitor.mobile }}
                             </option>
                         </select>
@@ -36,11 +43,9 @@
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <label for="purpose" class="form-label">Purpose</label>
-                    <input type="text" name="purpose" id="purpose" class="form-control"
-                        value="{{ old('purpose') }}">
+                    <input type="text" name="purpose" id="purpose" class="form-control" value="{{ old('purpose') }}">
                 </div>
-p --}}
-                {{-- <div class="col-sm-12 col-md-6 col-lg-4 form-check">
+                    {{-- <div class="col-sm-12 col-md-6 col-lg-4 form-check">
                     <label for="&nbsp" class="label">&nbsp</label>
                     <input type="checkbox" name="prebooked" id="prebooked" class="form-check-input" value="1"
                         {{ old('prebooked') ? 'checked' : '' }}>
@@ -55,10 +60,8 @@ p --}}
     </div>
     {{-- <script src="https://unpkg.com/vue@3.5.21/dist/vue.esm-browser.js"></script>    --}}
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
-        const {
-            createApp
-        } = Vue
+       <script>
+        const { createApp } = Vue
 
         createApp({
             data() {
@@ -67,7 +70,8 @@ p --}}
                     employees: @json($employees),
                     visitorNumber: '',
                     selectedVisitor: '',
-                    filteredVisitors: @json($visitors)
+                    filteredVisitors: @json($visitors),
+                    visitorNumberError: ''
                 }
             },
             computed: {
@@ -79,6 +83,47 @@ p --}}
                 }
             },
             methods: {
+                handleVisitorNumberInput(event) {
+                    let value = event.target.value;
+                    
+                    // Remove all non-numeric characters
+                    value = value.replace(/\D/g, '');
+                    
+                    // Limit to 10 digits
+                    if (value.length > 10) {
+                        value = value.slice(0, 10);
+                    }
+                    
+                    // Update the model
+                    this.visitorNumber = value;
+                    
+                    // Validate and show error
+                    this.validateVisitorNumber();
+                    
+                    // Filter visitors
+                    this.filterVisitorsByNumber();
+                },
+                
+                validateVisitorNumber() {
+                    if (this.visitorNumber === '') {
+                        this.visitorNumberError = '';
+                        return true;
+                    }
+                    
+                    if (this.visitorNumber.length !== 10) {
+                        this.visitorNumberError = 'Mobile number must be exactly 10 digits';
+                        return false;
+                    }
+                    
+                    if (!/^\d{10}$/.test(this.visitorNumber)) {
+                        this.visitorNumberError = 'Mobile number must contain only numbers';
+                        return false;
+                    }
+                    
+                    this.visitorNumberError = '';
+                    return true;
+                },
+                
                 filterVisitorsByNumber() {
                     if (this.visitorNumber.trim() === '') {
                         // Show all visitors if no number entered
@@ -90,13 +135,16 @@ p --}}
                     // Filter visitors based on mobile number
                     this.filteredVisitors = this.visitors.filter(visitor => {
                         const phone = visitor.phone || visitor.mobile || ''
-                        return phone.includes(this.visitorNumber)
+                        // Remove non-numeric characters from phone for comparison
+                        const cleanPhone = phone.replace(/\D/g, '')
+                        return cleanPhone.includes(this.visitorNumber)
                     })
 
                     // Auto-select if exact match found
                     const exactMatch = this.filteredVisitors.find(visitor => {
                         const phone = visitor.phone || visitor.mobile || ''
-                        return phone === this.visitorNumber
+                        const cleanPhone = phone.replace(/\D/g, '')
+                        return cleanPhone === this.visitorNumber
                     })
 
                     if (exactMatch) {
@@ -107,20 +155,28 @@ p --}}
                     } else {
                         this.selectedVisitor = ''
                     }
-                },
-                watch: {
-                    selectedVisitor(newVal) {
-                        // Update the visitor number field when visitor is selected manually
-                        if (newVal) {
-                            const visitor = this.visitors.find(v => v.id == newVal)
-                            if (visitor) {
-                                this.visitorNumber = visitor.phone || visitor.mobile || ''
-                            }
-                        }
-                    }
                 }
             },
+            watch: {
+                selectedVisitor(newVal) {
+                    // Update the visitor number field when visitor is selected manually
+                    if (newVal) {
+                        const visitor = this.visitors.find(v => v.id == newVal)
+                        if (visitor) {
+                            const phone = visitor.phone || visitor.mobile || ''
+                            // Extract only digits and limit to 10
+                            const cleanPhone = phone.replace(/\D/g, '').slice(0, 10)
+                            this.visitorNumber = cleanPhone
+                            this.validateVisitorNumber()
+                        }
+                    } else {
+                        // Clear visitor number when no visitor is selected
+                        this.visitorNumber = ''
+                        this.visitorNumberError = ''
+                    }
+                }
+            }
         }).mount('#app')
-    </script>
+    </script>   
 @endsection
 

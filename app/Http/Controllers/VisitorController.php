@@ -127,5 +127,39 @@ class VisitorController extends Controller
         return response()->file($path);
     }
 
-    
+    function securePhoto(Visitor $visitor)
+    {
+        // if (!auth()->check()) {
+        //     abort(403, 'Unauthorized access');
+        // }
+        $filename = $visitor->photo_url;
+        $path = storage_path('app/private/visitors/webcam_photo/' . $filename);
+        // dd($path);   
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found');
+        }
+
+        return response()->file($path);
+    }
+
+    function secureID(Visitor $visitor)
+    {
+
+        $filename = $visitor->id_proof_img;
+        $path = storage_path('app/private/visitors/webcam_id_photo/' . $filename);
+        // dd($path);   
+
+        if (!file_exists($path)) {
+            abort(404, 'File not found');
+        }
+
+        return response()->file($path);
+    }
+
+    function test(Visitor $visitor)
+    {
+        // dd($visitor)
+                return $this->securePhoto($visitor);
+    }
 }

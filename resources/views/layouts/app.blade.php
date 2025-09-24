@@ -33,11 +33,11 @@
 {{-- Create a common footer --}}
 
 @section('footer')
-    <div class="float-right">
+    <div class="float-right d-print-none">
         Version: {{ config('app.version', '1.0.0') }}
     </div>
 
-    <strong>
+    <strong class=" d-print-none    ">
         <a href="{{ config('app.company_url', '#') }}">
             {{ config('app.company_name', 'My company') }}
         </a>
