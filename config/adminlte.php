@@ -343,6 +343,13 @@ return [
             'icon' => 'fa fa-fw fa-users text-success',
 
         ],
+        ['header' => 'Reports'],
+        [
+            'text' => 'Reports',
+            'url' => 'reports',
+            'icon' => 'fa fa-fw fa-file text-warning',
+
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'Settings',
