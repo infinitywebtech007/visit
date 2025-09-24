@@ -23,6 +23,8 @@ class StoreVisitRequest extends FormRequest
     {
         return [
             'visitor_id' => 'nullable',
+            'visitor_mobile' => 'nullable',
+
             'attendant' => 'nullable',
             'purpose' => 'nullable|string|max:20',
             'HOD' => 'nullable|string|max:500',

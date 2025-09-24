@@ -7,7 +7,7 @@
     <div class="card">
         <div class="card-body">
             <p class="card-text"><strong>Visitor:</strong> {{ $visit->visitor->name }}</p>
-            <p class="card-text"><strong>Attendant:</strong> {{ $visit->attendant->user->name }}</p>
+            <p class="card-text"><strong>Attendant:</strong> {{ $visit->attendant }}</p>
             <p class="card-text"><strong>Purpose:</strong> {{ $visit->purpose ?: 'N/A' }}</p>
             <p class="card-text"><strong>HOD:</strong> {{ $visit->HOD ?: 'N/A' }}</p>
             <p class="card-text"><strong>Prebooked:</strong> {{ $visit->prebooked ? 'Yes' : 'No' }}</p>

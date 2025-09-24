@@ -157,7 +157,7 @@
                                                                         id="mobile" class="form-control"
                                                                         value="{{ old('mobile') }}"
                                                                         wire:model="mobile"
-                                                                        placeholder="+1 (555) 123-4567">
+                                                                        placeholder="10 digit mobile number">
                                                                 </div>
                                                             </div>
 

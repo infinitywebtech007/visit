@@ -24,8 +24,8 @@ class VisitController extends Controller
      */
     public function create()
     {
-        $visitors = Visitor::all();
-        $employees = Employee::all();
+        $visitors = Visitor::all(); // Only needed fields
+        $employees = Employee::with('user:id,name')->get(['id','position','user_id']); // Only needed fields
         return view('visits.create', compact('visitors', 'employees'));
     }
 

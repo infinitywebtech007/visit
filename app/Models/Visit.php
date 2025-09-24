@@ -23,8 +23,8 @@ class Visit extends Model
         return $this->belongsTo(Visitor::class);
     }
 
-    public function attendant()
+    public function employee()
     {
-        return $this->belongsTo(Employee::class, 'attendant');
+        return $this->belongsTo(Employee::class);
     }
 }
