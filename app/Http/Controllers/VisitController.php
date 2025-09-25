@@ -74,4 +74,12 @@ class VisitController extends Controller
         $visit->delete();
         return redirect()->route('visits.index')->with('success', 'Visit deleted successfully.');
     }
+
+    function print(Visit $visit)
+    {
+        $visit->load('visitor', 'employee', 'manager');
+        // return view('visits.print', compact('visit'));
+        $pdf = \PDF::loadView('visits.print', compact('visit'));
+        return $pdf->stream('visit_'.$visit->id.'.pdf');    
+    }
 }

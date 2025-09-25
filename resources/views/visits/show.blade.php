@@ -31,7 +31,8 @@
             {{-- <p class="card-text"><strong>Prebooked:</strong> {{ $visit->prebooked ? 'Yes' : 'No' }}</p> --}}
         </div>
     </div>
-        <button type="button" class="d-print-none" onclick="window.print()">Print This Page</button>
+        
+                    <a class="btn btn-dark btn-sm" href="/visit-print/{{ $visit->id }}">Print</a>
     
     <a href="{{ route('visits.edit', $visit) }}" class="btn btn-warning mt-3 d-print-none">Edit</a>
     <a href="{{ route('visits.index') }}" class="btn btn-secondary mt-3 d-print-none">Back to List</a>

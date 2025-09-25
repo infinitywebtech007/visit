@@ -18,8 +18,10 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('visits', VisitController::class);
+    Route::get('/visit-print/{visit}', [VisitController::class, 'print'])->name('visits.print');
     Route::resource('users', UserController::class);
     Route::resource('reports', ReportController::class);
+    
     Route::resource('visitors', VisitorController::class);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/secure-photo/{visitor}', [VisitorController::class, 'securePhoto'])->name('photo.secure');
