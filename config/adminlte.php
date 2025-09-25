@@ -326,13 +326,13 @@ return [
             // 'label_color' => 'success',
         ],
         [
-            'text' => 'Visitors',
+            'text' => 'Visitors Master',
             'url' => 'visitors',
             'icon' => 'fa fa-fw fa-user text-person',
 
         ],
         [
-            'text' => 'Employees',
+            'text' => 'Employees ',
             'url' => 'employees',
             'icon' => 'fa fa-fw fa-user text-info',
 
