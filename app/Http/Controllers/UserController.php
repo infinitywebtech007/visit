@@ -103,7 +103,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->user_id);
         $user->assignRole($request->role);
-        return back()->with('success', 'Role assigned successfully');
+        return response()->json(['message' => 'Role assigned successfully']);
     }
 
     function removeRole(Request $request)
@@ -114,7 +114,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->user_id);
         $user->removeRole($request->role);
-        return back()->with('success', 'Role removed successfully');
+        return response()->json(['message' => 'Role removed successfully']);
     }
     
     function givePermission(Request $request)
@@ -125,7 +125,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->user_id);
         $user->givePermissionTo($request->permission);
-        return back()->with('success', 'Permission granted successfully');
+        return response()->json(['message' => 'Permission granted successfully']);
     }
 
     function removePermission(Request $request)
@@ -136,7 +136,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->user_id);
         $user->revokePermissionTo($request->permission);
-        return back()->with('success', 'Permission revoked successfully');
+        return response()->json(['message' => 'Permission revoked successfully']);
     }
 
     function createRole(Request $request)
@@ -144,8 +144,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|unique:roles,name',
         ]);
-        Role::create(['name' => $request->name]);
-        return back()->with('success', 'Role created successfully');
+        $role = Role::create(['name' => $request->name]);
+        return response()->json(['message' => 'Role created successfully', 'role' => $role]);
     }
 
     function deleteRole(Request $request)
@@ -156,9 +156,9 @@ class UserController extends Controller
         $role = Role::findByName($request->name);
         if ($role) {
             $role->delete();
-            return back()->with('success', 'Role deleted successfully');
+            return response()->json(['message' => 'Role deleted successfully']);
         }
-        return back()->withErrors(['role' => 'Role not found']);
+        return response()->json(['error' => 'Role not found'], 404);
     }
 
     function addPermissionToRole(Request $request)
@@ -170,9 +170,9 @@ class UserController extends Controller
         $role = Role::findByName($request->role);
         if ($role) {
             $role->givePermissionTo($request->permission);
-            return back()->with('success', 'Permission added to role successfully');
+            return response()->json(['message' => 'Permission added to role successfully']);
         }
-        return back()->withErrors(['role' => 'Role not found']);
+        return response()->json(['error' => 'Role not found'], 404);
     }
 
     function removePermissionFromRole(Request $request)
@@ -184,9 +184,9 @@ class UserController extends Controller
         $role = Role::findByName($request->role);
         if ($role) {
             $role->revokePermissionTo($request->permission);
-            return back()->with('success', 'Permission removed from role successfully');
+            return response()->json(['message' => 'Permission removed from role successfully']);
         }
-        return back()->withErrors(['role' => 'Role not found']);
+        return response()->json(['error' => 'Role not found'], 404);
     }
 
     function createPermission(Request $request)
@@ -194,8 +194,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|unique:permissions,name',
         ]);
-        Permission::create(['name' => $request->name]);
-        return back()->with('success', 'Permission created successfully');
+        $permission = Permission::create(['name' => $request->name]);
+        return response()->json(['message' => 'Permission created successfully', 'permission' => $permission]);
     }
 
     function deletePermission(Request $request)
@@ -206,9 +206,9 @@ class UserController extends Controller
         $permission = Permission::findByName($request->name);
         if ($permission) {
             $permission->delete();
-            return back()->with('success', 'Permission deleted successfully');
+            return response()->json(['message' => 'Permission deleted successfully']);
         }
-        return back()->withErrors(['permission' => 'Permission not found']);
+        return response()->json(['error' => 'Permission not found'], 404);
     }
 
 }

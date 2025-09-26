@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('subtitle', 'Roles and Permissions')
@@ -178,7 +179,8 @@ createApp({
             const hasRole = this.selectedUserRoles.includes(roleName);
             const url = hasRole ? '/remove-role' : '/assign-role';
             try {
-                await axios.post(url, { user_id: this.selectedUserId, role: roleName });
+                const response = await axios.post(url, { user_id: this.selectedUserId, role: roleName });
+                alert('Success: ' + response.data.message);
                 // Model already updated by v-model, update selectedUser for consistency
                 if (hasRole) {
                     this.selectedUser.roles = this.selectedUser.roles.filter(r => r.name !== roleName);
@@ -201,7 +203,8 @@ createApp({
             const hasPermission = this.selectedUserPermissions.includes(permissionName);
             const url = hasPermission ? '/remove-permission' : '/give-permission';
             try {
-                await axios.post(url, { user_id: this.selectedUserId, permission: permissionName });
+                const response = await axios.post(url, { user_id: this.selectedUserId, permission: permissionName });
+                alert('Success: ' + response.data.message);
                 // Model already updated, update selectedUser
                 if (hasPermission) {
                     this.selectedUser.permissions = this.selectedUser.permissions.filter(p => p.name !== permissionName);
@@ -221,19 +224,24 @@ createApp({
         },
         async createRole() {
             try {
-                await axios.post('/create-role', { name: this.newRoleName });
-                location.reload();
+                const response = await axios.post('/create-role', { name: this.newRoleName });
+                alert('Success: ' + response.data.message);
+                const newRole = response.data.role;
+                newRole.permissions = [];
+                this.roles.push(newRole);
+                this.newRoleName = '';
             } catch (error) {
-                alert('Error: ' + error.response.data.message);
+                alert('Error: ' + (error.response.data.error || error.response.data.message));
             }
         },
         async deleteRole(roleName) {
             if (!confirm('Delete role?')) return;
             try {
-                await axios.post('/delete-role', { name: roleName });
-                location.reload();
+                const response = await axios.post('/delete-role', { name: roleName });
+                alert('Success: ' + response.data.message);
+                this.roles = this.roles.filter(r => r.name !== roleName);
             } catch (error) {
-                alert('Error: ' + error.response.data.message);
+                alert('Error: ' + (error.response.data.error || error.response.data.message));
             }
         },
         async togglePermissionForRole(roleName, permissionName, event) {
@@ -241,7 +249,8 @@ createApp({
             const shouldAdd = event.target.checked;
             const url = shouldAdd ? '/add-permission-to-role' : '/remove-permission-from-role';
             try {
-                await axios.post(url, { role: roleName, permission: permissionName });
+                const response = await axios.post(url, { role: roleName, permission: permissionName });
+                alert('Success: ' + response.data.message);
                 if (shouldAdd) {
                     const perm = this.permissions.find(p => p.name === permissionName);
                     if (perm && !role.permissions.some(p => p.name === permissionName)) {
@@ -257,19 +266,22 @@ createApp({
         },
         async createPermission() {
             try {
-                await axios.post('/create-permission', { name: this.newPermissionName });
-                location.reload();
+                const response = await axios.post('/create-permission', { name: this.newPermissionName });
+                alert('Success: ' + response.data.message);
+                this.permissions.push(response.data.permission);
+                this.newPermissionName = '';
             } catch (error) {
-                alert('Error: ' + error.response.data.message);
+                alert('Error: ' + (error.response.data.error || error.response.data.message));
             }
         },
         async deletePermission(permissionName) {
             if (!confirm('Delete permission?')) return;
             try {
-                await axios.post('/delete-permission', { name: permissionName });
-                location.reload();
+                const response = await axios.post('/delete-permission', { name: permissionName });
+                alert('Success: ' + response.data.message);
+                this.permissions = this.permissions.filter(p => p.name !== permissionName);
             } catch (error) {
-                alert('Error: ' + error.response.data.message);
+                alert('Error: ' + (error.response.data.error || error.response.data.message));
             }
         }
     }
