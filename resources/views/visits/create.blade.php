@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container" id="app">
-        <h1>Create Visit</h1>
+        <h1>Create Pass</h1>
         <form action="/visits" method="post">
             @csrf
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="mb-3">
-                       <label for="visitor_id" class="label">Visitor Number</label>
+                       <label for="visitor_id" class="label">Search by Number</label>
                         <input type="text" 
                                name="visitor_number" 
                                id="visitor_number" 
@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     <div class="mb-3">
-                        <label for="visitor_id" class="label">Visitor</label>
+                        <label for="visitor_id" class="label">Search by Name</label>
                         <select name="visitor_id" class="form-control" id="visitor_id" v-model="selectedVisitor">
                             <option value="">Select Visitor</option>
                             <option v-for="visitor in filteredVisitors" :key="visitor.id" :value="visitor.id">
@@ -33,9 +33,9 @@
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <label for="attendant" class="form-label">Employee</label>
+                    <label for="attendant" class="form-label">To meet Employee</label>
                     <select name="employee_id" id="attendant" class="form-control" required>
-                        <option value="">Select Attendant</option>
+                        <option value="">Select Employee</option>
                         @foreach ($employees as $employee)
                             <option value="{{ $employee->id }}">{{ $employee->user->name }}</option>
                         @endforeach

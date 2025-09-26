@@ -20,7 +20,8 @@
                                 <td>Visitor Name</td>
                                 <td>Employee Name</td>
                                 <td>Purpose</td>
-                                <td>Date Time</td>
+                                <td>Visit Date (In Time)</td>
+                                <td>Visit Date (Out Time)</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,7 @@
                                 <td>{{ $visit->employee->user->name }}</td>
                                 <td>{{ $visit->purpose }}</td>
                                 <td>{{ $visit->created_at }}</td>
+                                <td>{{ $visit->out_time ?? '-' }}</td>
                             </tr>
                             @endforeach
                         </tbody>

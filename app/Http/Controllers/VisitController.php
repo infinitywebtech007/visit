@@ -85,10 +85,11 @@ class VisitController extends Controller
         // $manager = new ImageManager(Driver::class);
         
         
-        $path = storage_path('app/private/visitors/webcam_photo/' . $visit->visitor->photo_path);
+        $path = storage_path('app\private\visitors\webcam_photo\\' . $visit->visitor->photo_url);
         // $image = $manager->read($path); // 800 x 600
-        // dd($image);
-    $imageData = base64_encode($image);
+        // dd($path,$visit->visitor);
+        $imageData = base64_encode(file_get_contents($path));
+        // dd($imageData);
         // $image->scaleDown(width: 200); // 200 x 150
         
         // scale down to fixed height
@@ -97,7 +98,8 @@ class VisitController extends Controller
         // echo '<img src="' . $src . '" alt="Description">';   
         $visit->load('visitor', 'employee', 'manager');
         // return view('visits.print', compact('visit'));
-        $pdf = \PDF::loadView('visits.print', compact('visit'), ['visitor_image' => $src]);
+        
+        $pdf = app('dompdf.wrapper')->loadView('visits.print', compact('visit'), ['src' => $src]);
         return $pdf->stream('visit_' . $visit->id . '.pdf');
     }
 }

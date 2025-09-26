@@ -318,7 +318,7 @@ return [
         //     'text' => 'search',
         // ],
         [
-            'text' => 'Visits',
+            'text' => 'Create Visitor Pass',
             'url' => 'visits',
             // 'can' => 'manage-visits',
             'icon' => 'fa fa-fw fa-list text-info',
@@ -326,13 +326,13 @@ return [
             // 'label_color' => 'success',
         ],
         [
-            'text' => 'Visitors Master',
+            'text' => 'Visitor Master',
             'url' => 'visitors',
             'icon' => 'fa fa-fw fa-user text-person',
 
         ],
         [
-            'text' => 'Employees ',
+            'text' => 'Employee Master',
             'url' => 'employees',
             'icon' => 'fa fa-fw fa-user text-info',
 
