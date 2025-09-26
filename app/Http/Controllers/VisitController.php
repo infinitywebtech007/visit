@@ -85,7 +85,7 @@ class VisitController extends Controller
         // $manager = new ImageManager(Driver::class);
         
         
-        $path = storage_path('app\private\visitors\webcam_photo\\' . $visit->visitor->photo_url);
+        $path = storage_path('app/private/visitors/webcam_photo/' . $visit->visitor->photo_url);
         // $image = $manager->read($path); // 800 x 600
         // dd($path,$visit->visitor);
         $imageData = base64_encode(file_get_contents($path));
