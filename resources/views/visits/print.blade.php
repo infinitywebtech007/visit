@@ -14,17 +14,25 @@
         }
     </style>
 </head>
-
+@php
+    $setting = ['get' => fn($k, $d = null) => \App\Models\Setting::get($k, $d)];
+@endphp
 <body>
     <div class="page">
 
         <h2>
-
+            @if ($setting['get']('print_visit_pass_header'))
             <center>
-                Visit Managemnt System
+                {{ $setting['get']('print_visit_pass_header') }}
             </center>
+            @else   
+            <center>
+                {{ $setting['get']('app_name') }}
+            </center>
+            @endif
         </h2>
-
+        
+        <h4 style="text-align:center">Visiting Pass</h4>
         <table border="1" style="border-collapse:collapse;width:100%">
             <tr>
                 <td width="40%">Date : {{ $visit->created_at->format('Y-m-d') }}</td>

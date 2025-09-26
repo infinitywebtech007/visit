@@ -3,8 +3,12 @@
 {{-- Extend and customize the browser title --}}
 
 @section('title')
-    {{ config('adminlte.title') }}
-    @hasSection('subtitle') | @yield('subtitle') @endif
+    @php
+        $setting = ['get' => fn($k, $d = null) => \App\Models\Setting::get($k, $d)];
+    @endphp
+    @hasSection('subtitle')
+        | @yield('subtitle')
+    @endif
 @stop
 
 {{-- Extend and customize the page content header --}}
@@ -89,5 +93,5 @@
 {{-- Add common CSS customizations --}}
 
 @push('css')
-@livewireStyles
+    @livewireStyles
 @endpush

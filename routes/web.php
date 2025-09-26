@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
 use App\Http\Controllers\VisitorController;
@@ -17,6 +18,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
+    Route::resource('settings', SettingController::class);
     Route::resource('visits', VisitController::class);
     Route::get('/visit-print/{visit}', [VisitController::class, 'print'])->name('visits.print');
     Route::resource('users', UserController::class);
