@@ -33,5 +33,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/report-by-date', [ReportController::class, 'report_by_date'])->name('report.by.date');
     Route::get('/report-by-employee', [ReportController::class, 'report_by_employee'])->name('report.by.employee');
     Route::get('/report-by-visitor', [ReportController::class, 'report_by_visitor'])->name('report.by.visitor');
+    Route::get('/roles-and-permissions', [UserController::class, 'rolesAndPermissions'])->name('roles.and.permissions');
+    Route::post('/assign-role', [UserController::class, 'assignRole'])->name('assign.role');
+    Route::post('/remove-role', [UserController::class, 'removeRole'])->name('remove.role');
+    Route::post('/give-permission', [UserController::class, 'givePermission'])->name('give.permission');
+    Route::post('/remove-permission', [UserController::class, 'removePermission'])->name('remove.permission');
+    Route::post('/create-role', [UserController::class, 'createRole'])->name('create.role');
+    Route::post('/delete-role', [UserController::class, 'deleteRole'])->name('delete.role');
+    Route::post('/add-permission-to-role', [UserController::class, 'addPermissionToRole'])->name('add.permission.to.role');
+    Route::post('/remove-permission-from-role', [UserController::class, 'removePermissionFromRole'])->name('remove.permission.from.role');
+    Route::post('/create-permission', [UserController::class, 'createPermission'])->name('create.permission');
+    Route::post('/delete-permission', [UserController::class, 'deletePermission'])->name('delete.permission');
 });
 

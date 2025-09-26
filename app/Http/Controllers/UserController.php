@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -68,7 +70,6 @@ class UserController extends Controller
     // Change password form
     public function changePasswordForm()
     {
-        // $userAuth::user();
         return view('users.change_password');
     }
     // Handle password change
@@ -86,4 +87,128 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('change.password.form')->with('success', 'Password changed successfully');
     }
+
+    function rolesAndPermissions()
+    {
+        $users = User::with('roles', 'permissions')->get();
+        $roles = Role::with('permissions')->get();
+        $permissions = Permission::all();
+        return view('users.roles_permissions', compact('users', 'roles', 'permissions'));
+    }
+    function assignRole(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'role' => 'required|string',
+        ]);
+        $user = User::find($request->user_id);
+        $user->assignRole($request->role);
+        return back()->with('success', 'Role assigned successfully');
+    }
+
+    function removeRole(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'role' => 'required|string',
+        ]);
+        $user = User::find($request->user_id);
+        $user->removeRole($request->role);
+        return back()->with('success', 'Role removed successfully');
+    }
+    
+    function givePermission(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'permission' => 'required|string',
+        ]);
+        $user = User::find($request->user_id);
+        $user->givePermissionTo($request->permission);
+        return back()->with('success', 'Permission granted successfully');
+    }
+
+    function removePermission(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'permission' => 'required|string',
+        ]);
+        $user = User::find($request->user_id);
+        $user->revokePermissionTo($request->permission);
+        return back()->with('success', 'Permission revoked successfully');
+    }
+
+    function createRole(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:roles,name',
+        ]);
+        Role::create(['name' => $request->name]);
+        return back()->with('success', 'Role created successfully');
+    }
+
+    function deleteRole(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+        $role = Role::findByName($request->name);
+        if ($role) {
+            $role->delete();
+            return back()->with('success', 'Role deleted successfully');
+        }
+        return back()->withErrors(['role' => 'Role not found']);
+    }
+
+    function addPermissionToRole(Request $request)
+    {
+        $request->validate([
+            'role' => 'required|string',
+            'permission' => 'required|string',
+        ]);
+        $role = Role::findByName($request->role);
+        if ($role) {
+            $role->givePermissionTo($request->permission);
+            return back()->with('success', 'Permission added to role successfully');
+        }
+        return back()->withErrors(['role' => 'Role not found']);
+    }
+
+    function removePermissionFromRole(Request $request)
+    {
+        $request->validate([
+            'role' => 'required|string',
+            'permission' => 'required|string',
+        ]);
+        $role = Role::findByName($request->role);
+        if ($role) {
+            $role->revokePermissionTo($request->permission);
+            return back()->with('success', 'Permission removed from role successfully');
+        }
+        return back()->withErrors(['role' => 'Role not found']);
+    }
+
+    function createPermission(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:permissions,name',
+        ]);
+        Permission::create(['name' => $request->name]);
+        return back()->with('success', 'Permission created successfully');
+    }
+
+    function deletePermission(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string',
+        ]);
+        $permission = Permission::findByName($request->name);
+        if ($permission) {
+            $permission->delete();
+            return back()->with('success', 'Permission deleted successfully');
+        }
+        return back()->withErrors(['permission' => 'Permission not found']);
+    }
+
 }
