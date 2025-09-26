@@ -18,7 +18,7 @@
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade in active" id="users" role="tabpanel" aria-labelledby="users-tab">
+        <div class="tab-pane fade show active" id="users" role="tabpanel" aria-labelledby="users-tab">
             <div class="row mt-4">
                 <div class="col-md-12">
                     <div class="card">
