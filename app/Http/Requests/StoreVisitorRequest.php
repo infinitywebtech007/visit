@@ -29,6 +29,7 @@ class StoreVisitorRequest extends FormRequest
             'company_name'=>'required',
             'photo_url'=>'nullable',
             'id_proof'=>'nullable',
+            'id_proof_number'=>'nullable',
             'id_proof_img'=>'nullable',
         ];
     }
