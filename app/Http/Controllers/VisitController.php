@@ -7,6 +7,10 @@ use App\Models\Visitor;
 use App\Models\Employee;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
+use Illuminate\Support\Facades\Storage;
+
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;
 
 class VisitController extends Controller
 {
@@ -25,7 +29,7 @@ class VisitController extends Controller
     public function create()
     {
         $visitors = Visitor::all(); // Only needed fields
-        $employees = Employee::with('user:id,name')->get(['id','position','user_id']); // Only needed fields
+        $employees = Employee::with('user:id,name')->get(['id', 'position', 'user_id']); // Only needed fields
         return view('visits.create', compact('visitors', 'employees'));
     }
 
@@ -77,9 +81,23 @@ class VisitController extends Controller
 
     function print(Visit $visit)
     {
+        // create new image instance
+        // $manager = new ImageManager(Driver::class);
+        
+        
+        $path = storage_path('app/private/visitors/webcam_photo/' . $visit->visitor->photo_path);
+        // $image = $manager->read($path); // 800 x 600
+        // dd($image);
+    $imageData = base64_encode($image);
+        // $image->scaleDown(width: 200); // 200 x 150
+        
+        // scale down to fixed height
+        // $image->scaleDown(height: 300); //  400 x 300
+        $src = 'data:' . mime_content_type($path) . ';base64,' . $imageData;
+        // echo '<img src="' . $src . '" alt="Description">';   
         $visit->load('visitor', 'employee', 'manager');
         // return view('visits.print', compact('visit'));
-        $pdf = \PDF::loadView('visits.print', compact('visit'));
-        return $pdf->stream('visit_'.$visit->id.'.pdf');    
+        $pdf = \PDF::loadView('visits.print', compact('visit'), ['visitor_image' => $src]);
+        return $pdf->stream('visit_' . $visit->id . '.pdf');
     }
 }

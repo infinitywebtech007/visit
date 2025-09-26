@@ -30,6 +30,7 @@ class StoreVisitRequest extends FormRequest
             'HOD' => 'nullable|string|max:500',
             'prebooked' => 'nullable',
             'visit_date' => 'nullable|date',
+            'id_proof_number' => 'nullable|string|max:50',
         ];
     }
 }
