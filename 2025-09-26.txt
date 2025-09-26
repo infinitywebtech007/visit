@@ -1,0 +1,5 @@
+-> Dashboard show Open Pass only ('Close Now','Close'-> popup to select time, fetch date from VisitDate)
+
+-> Roles Permissions
+
+-> 

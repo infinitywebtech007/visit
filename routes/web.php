@@ -23,6 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/visit-print/{visit}', [VisitController::class, 'print'])->name('visits.print');
     Route::resource('users', UserController::class);
     Route::resource('reports', ReportController::class);
+    Route::get('/change-password', [UserController::class, 'changePasswordForm'])->name('change.password.form');
+    Route::post('/change-password', [UserController::class, 'changePassword'])->name('change.password');
     
     Route::resource('visitors', VisitorController::class);
     Route::get('/home', [HomeController::class, 'index'])->name('home');

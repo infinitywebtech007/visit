@@ -358,7 +358,7 @@ return [
         ],
         [
             'text' => 'change_password',
-            'url' => 'admin/settings',
+            'url' => 'change-password',
             'icon' => 'fas fa-fw fa-key text-warning',
         ],
         // [

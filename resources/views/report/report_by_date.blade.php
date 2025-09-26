@@ -20,8 +20,9 @@
                                 <td>Visitor Name</td>
                                 <td>Employee Name</td>
                                 <td>Purpose</td>
-                                <td>Visit Date (In Time)</td>
-                                <td>Visit Date (Out Time)</td>
+                                <td>Visit Date</td>
+                                <td>In Time</td>
+                                <td>Out Time</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -30,7 +31,8 @@
                                 <td>{{ $visit->visitor->name }}</td>
                                 <td>{{ $visit->employee->user->name }}</td>
                                 <td>{{ $visit->purpose }}</td>
-                                <td>{{ $visit->created_at }}</td>
+                                <td>{{ $visit->created_at->format('d/m/Y') }}</td>
+                                <td>{{ $visit->created_at->format('H:i:s A') }}</td>
                                 <td>{{ $visit->out_time ?? '-' }}</td>
                             </tr>
                             @endforeach
@@ -38,6 +40,7 @@
                     </table>
                     <div class="toolbar"></div>
 
+                    <a href="{{ route('reports.index') }}" class="btn btn-secondary mt-3 d-print-none">Back to List</a>
                 </div>
             </div>
         </div>

@@ -69,7 +69,7 @@
                                 <lable class="lable">Visitors</lable>
                                 <select required class="form-control" name="visitor_id" id="visitor_id">
                                     @foreach ($visitors as $visitor)
-                                    <option value="{{ $visitor->id }} "> {{$visitor->id }} </option>
+                                    <option value="{{ $visitor->id }} "> {{$visitor->name }} </option>
                                     @endforeach
                                 </select>
                             </div>                            

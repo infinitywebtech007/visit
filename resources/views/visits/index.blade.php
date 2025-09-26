@@ -33,7 +33,7 @@
                 <td>{{ $visit->prebooked ? 'Yes' : 'No' }}</td>
                 <td>{{ $visit->created_at->format('Y-m-d H:i') }}</td>
                 <td>
-                                        <a class="btn btn-dark btn-sm" href="/visit-print/{{ $visit->id }}">Print</a>
+                                        <a class="btn btn-dark btn-sm" target="_blank" href="/visit-print/{{ $visit->id }}">Print</a>
 
                     <a href="{{ route('visits.show', $visit) }}" class="btn btn-info btn-sm">View</a>
                     <a href="{{ route('visits.edit', $visit) }}" class="btn btn-warning btn-sm">Edit</a>
