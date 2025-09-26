@@ -41,7 +41,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="col-sm-12 col-md-6 col-lg-6">
                     <label for="purpose" class="form-label">Purpose</label>
                     <input type="text" name="purpose" id="purpose" class="form-control" value="{{ old('purpose') }}">
                 </div>
@@ -52,7 +52,7 @@
                     <label for="prebooked" class="form-check-label">Prebooked</label>
                 </div> --}}
                 <div class="col-sm-12">
-                    <input type="submit" value="submit">
+                    <input type="submit" value="Submit" class="btn bg-teal mt-3 ">
                 </div>
             </div>
         </form>

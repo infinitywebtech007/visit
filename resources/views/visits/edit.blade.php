@@ -56,7 +56,7 @@
             </select>
         </div> --}}
 
-        <button type="submit" class="btn btn-primary">Update Visit</button>
+        <button type="submit" class="btn bg-teal">Update Visit</button>
         <a href="{{ route('visits.index') }}" class="btn btn-secondary">Cancel</a>
     </form>
 </div>

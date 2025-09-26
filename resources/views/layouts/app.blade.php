@@ -93,5 +93,16 @@
 {{-- Add common CSS customizations --}}
 
 @push('css')
+
+<style>
+        .bg {
+            background: linear-gradient(135deg, #12c738 0%, #0099b8 100%);
+        }
+        .nav-sidebar .nav-item>.nav-link {
+            position: relative;
+            color: white;
+        }
+</style>
     @livewireStyles
+
 @endpush

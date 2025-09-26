@@ -40,25 +40,20 @@
                 <div class="row mt-3 pt-1">
                     <div class="col-sm12">
                         <div class="accordion" id="accordionExample">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            View Document Photo
-                                        </button>
-                                    </h5>
-                                </div>
-
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-                                    data-parent="#accordionExample">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            <strong class="text-center">Photo of Document</strong>
-                                            <img class="img-fluid w-100" src="/secure-id-photo/{{ $visit->visitor->id }}"
-                                                alt="      ">
-                                        </p>
-                                    </div>
+                            <h5 class="mb-0">
+                                <button class="btn btn-link bg-secondary" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    View Document Photo
+                                </button>
+                            </h5>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <strong class="text-center">Photo of Document</strong>
+                                        <img class="img-fluid w-100" src="/secure-id-photo/{{ $visit->visitor->id }}"
+                                            alt="      ">
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -69,9 +64,15 @@
             </div>
         </div>
 
-        <a class="btn btn-dark btn mt-3" target="_blank" href="/visit-print/{{ $visit->id }}">Print</a>
+        <a class="btn bg-teal btn mt-3" target="_blank" href="/visit-print/{{ $visit->id }}">
+            <div class="fa fa-print"></div>
+        </a>
 
-        <a href="{{ route('visits.edit', $visit) }}" class="btn btn-warning mt-3 d-print-none">Edit</a>
-        <a href="{{ route('visits.index') }}" class="btn btn-secondary mt-3 d-print-none">Back to List</a>
+        <a href="{{ route('visits.edit', $visit) }}" class="btn bg-teal mt-3 d-print-none">
+            <div class="fa fa-edit"></div>
+        </a>
+        <a href="{{ route('visits.index') }}" class="btn btn-secondary mt-3 d-print-none">
+            <fa class="fa fa-left-arrow">Back</fa>
+        </a>
     </div>
 @endsection
