@@ -361,6 +361,11 @@ return [
             'url' => 'change-password',
             'icon' => 'fas fa-fw fa-key text-warning',
         ],
+        [
+            'text' => 'Roleds & Permissions',
+            'url' => 'roles-and-permissions',
+            'icon' => 'fas fa-fw fa-lock text-danger',
+        ],
         // [
         //     'text' => 'multilevel',
         //     'icon' => 'fas fa-fw fa-share',
