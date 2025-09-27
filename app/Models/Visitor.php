@@ -18,6 +18,7 @@ class Visitor extends Model
         'company_name',
         'photo_url',
         'id_proof',
+        'id_proof_number',
         'id_proof_img',
     ];
 

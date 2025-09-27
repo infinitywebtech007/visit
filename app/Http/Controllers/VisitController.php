@@ -87,14 +87,23 @@ class VisitController extends Controller
         
         $path = storage_path('app/private/visitors/webcam_photo/' . $visit->visitor->photo_url);
         // $image = $manager->read($path); // 800 x 600
-        // dd($path,$visit->visitor);
-        $imageData = base64_encode(file_get_contents($path));
+        // dd($path,$visit->visitor->photo_url);
+        if($visit->visitor->photo_url && file_exists($path)){
+            // $image = $manager->make($path); // 800 x 600
+
+            $imageData = base64_encode(file_get_contents($path ?? ''));
+            $src = 'data:' . mime_content_type($path) . ';base64,' . $imageData;
+        }
+        else{
+            // $src = asset('images/default_avatar.png');
+            $src = '';
+        }
+        
         // dd($imageData);
         // $image->scaleDown(width: 200); // 200 x 150
         
         // scale down to fixed height
         // $image->scaleDown(height: 300); //  400 x 300
-        $src = 'data:' . mime_content_type($path) . ';base64,' . $imageData;
         // echo '<img src="' . $src . '" alt="Description">';   
         $visit->load('visitor', 'employee', 'manager');
         // return view('visits.print', compact('visit'));
