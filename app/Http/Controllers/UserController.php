@@ -90,7 +90,7 @@ class UserController extends Controller
 
     function rolesAndPermissions()
     {
-        $users = User::with('roles', 'permissions')->get();
+     z   $users = User::with('roles', 'permissions')->get();
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
         return view('users.roles_permissions', compact('users', 'roles', 'permissions'));
