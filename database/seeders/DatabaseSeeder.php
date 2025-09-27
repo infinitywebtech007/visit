@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $role= Role::create(['name'=>'security-guard']);
+        $role= Role::create(['name'=>'employee']);
+        $role= Role::create(['name'=>'manager']);
         $role= Role::create(['name'=>'admin']);
 
         $user=User::create([
@@ -43,6 +46,15 @@ class DatabaseSeeder extends Seeder
         $permission = Permission::create(['name' => 'employees-delete']);
         $role->givePermissionTo($permission);
         $permission = Permission::create(['name' => 'employees-view']);
+        $role->givePermissionTo($permission);
+
+        $permission = Permission::create(['name' => 'security-guards-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'security-guards-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'security-guards-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'security-guards-view']);
         $role->givePermissionTo($permission);
 
         $permission = Permission::create(['name' => 'visitors-create']);

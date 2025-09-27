@@ -340,6 +340,13 @@ return [
 
         ],
         [
+            'text' => 'Security Master',
+            'url' => 'security-guards',
+            'can' => ['manage-security-guards','security-guards-view','security-guards-create','security-guards-edit','security-guards-delete'],
+            'icon' => 'fa fa-fw fa-user text-info',
+
+        ],
+        [
             'text' => 'Users',
             'url' => 'users',
             'icon' => 'fa fa-fw fa-users text-success',

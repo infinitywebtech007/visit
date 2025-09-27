@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -90,7 +91,7 @@ class UserController extends Controller
 
     function rolesAndPermissions()
     {
-     z   $users = User::with('roles', 'permissions')->get();
+        $users = User::with('roles', 'permissions')->get();
         $roles = Role::with('permissions')->get();
         $permissions = Permission::all();
         return view('users.roles_permissions', compact('users', 'roles', 'permissions'));
@@ -209,6 +210,36 @@ class UserController extends Controller
             return response()->json(['message' => 'Permission deleted successfully']);
         }
         return response()->json(['error' => 'Permission not found'], 404);
+    }
+
+    function userDeactivate(User $user)
+    {
+        if(!Auth::user()->hasPermissionTo('users-edit')) {
+            return back()->with(['error' => 'Unauthorized'], 403);
+        }
+        if ($user->status == 'active') {
+            $user->status = 'inactive';
+            $user->save();
+            return back()->with(['message' => 'User deactivated successfully']);
+        }
+        else {
+            return back()->with(['message' => 'User is already inactive']);
+        }
+    }
+
+    function userActivate(User $user)
+    {
+        if(!Auth::user()->hasPermissionTo('users-edit')) {
+            return back()->with(['error' => 'Unauthorized'], 403);
+        }
+        if ($user->status == 'inactive') {
+            $user->status = 'active';
+            $user->save();
+            return back()->with(['message' => 'User activated successfully']);
+        }
+        else {
+            return back()->with(['message' => 'User is already active']);
+        }
     }
 
 }

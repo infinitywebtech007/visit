@@ -6,7 +6,7 @@ use App\Models\Employee;
 use App\Models\User;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
-use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class EmployeeController extends Controller
 {
@@ -41,6 +41,9 @@ class EmployeeController extends Controller
             'email' => $validated['email'],
             'password' => bcrypt('password'), // default password, should be changed later
         ]);
+        
+        $role= Role::findByName('employee');
+        $user->assignRole($role);
 
         // Create employee linked to user
         $employee = new Employee();

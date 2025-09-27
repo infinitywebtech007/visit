@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SecurityGuardController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VisitController;
@@ -18,6 +19,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
+    Route::resource('security-guards', SecurityGuardController::class);
     Route::resource('settings', SettingController::class);
     Route::resource('visits', VisitController::class);
     Route::get('/visit-print/{visit}', [VisitController::class, 'print'])->name('visits.print');
@@ -44,5 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/remove-permission-from-role', [UserController::class, 'removePermissionFromRole'])->name('remove.permission.from.role');
     Route::post('/create-permission', [UserController::class, 'createPermission'])->name('create.permission');
     Route::post('/delete-permission', [UserController::class, 'deletePermission'])->name('delete.permission');
+
+    Route::post('users/deactivate/{user}', [UserController::class, 'userDeactivate'])->name('users.deactivate');
+    Route::post('users/activate/{user}', [UserController::class, 'userActivate'])->name('users.activate');
 });
 

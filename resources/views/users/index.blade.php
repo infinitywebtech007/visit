@@ -32,8 +32,23 @@
                                         <td>{{ $user->name ?? '' }}</td>
                                         <td>{{ $user->email ?? '' }}</td>
                                         {{-- <td>{{ $user->mobile ?? '' }}</td> --}}
-                                        <td>{{ $user->role ?? '' }}</td>
-                                        <td>-</td>
+                                        <td>{{ implode(', ',$user->roles()->pluck('name')->toArray() ?? []) }}</td>
+                                        <td>
+                                            @if ($user->status=='active')
+
+                                            <form action="users/deactivate/{{$user->id}}"  method="post">
+                                                @csrf
+                                                <input type="submit" value="Deactivate" class="btn btn-danger btn-sm">
+                                            
+                                            </form>
+                                            @else
+                                            <form action="users/activate/{{$user->id}}" method="post" >
+                                                @csrf
+                                                <input type="submit" value="Activate" class="btn btn-success btn-sm">
+                                            </form>
+                                                
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
