@@ -2,38 +2,70 @@
 
 @section('content')
     <div class="container">
-        <h1 class="d-print-none" >Visitor Details</h1>
+        <h1>Visit Details</h1>
 
         <div class="card">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-6">
-                        <h5 class="text-bold"> Name : {{ $visitor->name }}</h5>
-                        <p class="card-text"><strong>Email:</strong> {{ $visitor->email }}</p>
-                        <p class="card-text"><strong>Mobile:</strong> {{ $visitor->mobile ?: 'N/A' }}</p>
-                        <p class="card-text"><strong>Address:</strong> {{ $visitor->address ?: 'N/A' }}</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p class="card-text"><strong>Company Name:</strong> {{ $visitor->company_name ?: 'N/A' }}</p>
-                        <p class="card-text"><strong>ID Proof:</strong> {{ $visitor->id_proof ?: 'N/A' }}</p>
-                        <p class="card-text"><strong>First Visited On :</strong>
-                            {{ $visitor->created_at->format('Y-m-d H:i') }}</p>
-                    </div>
+
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <p class="card-text"><strong>Photo:</strong> <img class="img-fluid w-100"
+
+                    <div class="col-sm-5">
+                        <p class="card-text mb-0"><strong>Sr:</strong> {{ $visitor?->id }}</p>
+
+                        <p class="card-text mb-0"><strong>Name of Visitor:</strong> {{ $visitor->name }}</p>
+                        <p class="card-text mb-0"><strong>From Company :</strong>
+                            {{ $visitor->company_name ?? 'N/A' }}</p>
+                        <p class="card-text mb-0"><strong>ID Proof Document :</strong> {{ $visitor->id_proof }}</p>
+                    </div>
+                    <div class="col-sm-5">
+                        <p class="card-text mb-0 "><strong>Added On:</strong> {{ $visitor?->created_at->format('Y-m-d') }}
+                        </p>
+                        <p class="card-text mb-0 "><strong>From Location :</strong> {{ $visitor->address }}</p>
+                        <p class="card-text mb-0 "><strong>Contact Number :</strong> {{ $visitor->mobile ?? 'N/A' }}
+                        </p>
+                        <p class="card-text mb-0 "><strong>ID Proof Number :</strong>
+                            {{ $visitor->id_proof_number ?? 'N/A' }}</p>
+
+                    </div>
+                    <div class="col-sm-2">
+                        <p class="card-text"><strong>Photo of Visitor:</strong> <img class="img-fluid w-100"
                                 src="/secure-photo/{{ $visitor->id }}" alt="      "></p>
                     </div>
-                    <div class="col-sm-6">
-                        <p class="card-text"><strong>Photo of ID:</strong> <img class="img-fluid w-100"
-                                src="/secure-id-photo/{{ $visitor->id }}" alt="      "></p>
+                </div>
+                <div class="row mt-3 pt-1">
+                    <div class="col-sm12">
+                        <div class="accordion" id="accordionExample">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link bg-secondary" type="button" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    View Document Photo
+                                </button>
+                            </h5>
+                            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <strong class="text-center">Photo of Document</strong>
+                                        <img class="img-fluid w-100" src="/secure-id-photo/{{ $visitor->id }}"
+                                            alt="      ">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+                {{-- <p class="card-text"><strong>Prebooked:</strong> {{ $visit->prebooked ? 'Yes' : 'No' }}</p> --}}
             </div>
         </div>
-        <button type="button" class="d-print-none" onclick="window.print()">Print This Page</button>
-        <a href="{{ route('visitors.edit', $visitor) }}" class="btn btn-warning mt-3 d-print-none">Edit</a>
-        <a href="{{ route('visitors.index') }}" class="btn btn-secondary mt-3 d-print-none">Back to List</a>
+
+        <a href="{{ route('visitors.edit', $visitor) }}" class="btn bg-teal mt-3 d-print-none">
+            <div class="fa fa-edit"></div>
+        </a>
+        <a href="{{ route('visitors.index') }}" class="btn btn-secondary mt-3 d-print-none">
+            <fa class="fa fa-left-arrow">Back</fa>
+        </a>
     </div>
 @endsection
