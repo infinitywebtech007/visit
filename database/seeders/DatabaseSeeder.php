@@ -49,13 +49,13 @@ class DatabaseSeeder extends Seeder
         $permission = Permission::create(['name' => 'employees-view']);
         $role->givePermissionTo($permission);
 
-        $permission = Permission::create(['name' => 'visitor-create']);
+        $permission = Permission::create(['name' => 'visitors-create']);
         $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'visitor-edit']);
+        $permission = Permission::create(['name' => 'visitors-edit']);
         $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'visitor-delete']);
+        $permission = Permission::create(['name' => 'visitors-delete']);
         $role->givePermissionTo($permission);
-        $permission = Permission::create(['name' => 'visitor-view']);
+        $permission = Permission::create(['name' => 'visitors-view']);
         $role->givePermissionTo($permission);
 
         $permission = Permission::create(['name' => 'users-create']);
