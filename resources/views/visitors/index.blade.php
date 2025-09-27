@@ -12,7 +12,8 @@
     <div class="container">
 <div class="row">
     <div class="col-sm-12">
-        <a href="/visitors/create" class="btn btn-primary">Add</a>
+        <h1 class="d-inline float-left" >Visitors</h1>
+        <a href="/visitors/create" class="btn bg-teal float-right d-inline"><div class="fa fa-plus"></div></a>
     </div>
 </div>
         <div class="row">
@@ -38,15 +39,15 @@
                                         <td>{{ $visitor->company_name ?: 'N/A' }}</td>
                                         <td>
                                             <a href="{{ route('visitors.show', $visitor) }}"
-                                                class="btn btn-info btn-sm">View</a>
+                                                class="btn bg-teal btn-sm"><div class="fa fa-eye"></div></a>
                                             <a href="{{ route('visitors.edit', $visitor) }}"
-                                                class="btn btn-warning btn-sm">Edit</a>
+                                                class="btn bg-teal btn-sm"><div class="fa fa-edit"></div></a>
                                             <form action="{{ route('visitors.destroy', $visitor) }}" method="POST"
                                                 style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" onclick="return confirm('Are you sure?')"
-                                                    class="btn btn-danger btn-sm">Delete</button>
+                                                    class="btn btn-danger btn-sm"><div class="fa fa-trash"></div></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -65,6 +66,13 @@
 @push('css')
     {{-- Add here extra stylesheets --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.min.css">
+
+    <style>
+        .dt-button .buttons-pdf .buttons-html5 {
+            
+        }
+
+    </style>
 @endpush
 
 {{-- Push extra scripts --}}

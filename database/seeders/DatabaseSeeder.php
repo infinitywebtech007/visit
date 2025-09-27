@@ -27,5 +27,64 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
         ]);
         $user->assignRole('admin');
+        
+        $permission = Permission::create(['name' => 'manage-roles-and-permissions']);
+        $role->givePermissionTo($permission);
+        
+        $permission = Permission::create(['name' => 'visits-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visits-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visits-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visits-view']);
+        $role->givePermissionTo($permission);
+
+        $permission = Permission::create(['name' => 'employees-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'employees-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'employees-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'employees-view']);
+        $role->givePermissionTo($permission);
+
+        $permission = Permission::create(['name' => 'visitor-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visitor-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visitor-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'visitor-view']);
+        $role->givePermissionTo($permission);
+
+        $permission = Permission::create(['name' => 'users-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'users-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'users-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'users-view']);
+        $role->givePermissionTo($permission);
+
+        $permission = Permission::create(['name' => 'reports-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'reports-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'reports-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'reports-view']);
+        $role->givePermissionTo($permission);
+        
+
+        $permission = Permission::create(['name' => 'settings-create']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'settings-edit']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'settings-delete']);
+        $role->givePermissionTo($permission);
+        $permission = Permission::create(['name' => 'settings-view']);
+        $role->givePermissionTo($permission);
+        
     }
 }

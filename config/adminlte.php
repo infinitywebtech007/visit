@@ -320,7 +320,7 @@ return [
         [
             'text' => 'Create Visitor Pass',
             'url' => 'visits',
-            // 'can' => 'manage-visits',
+            'can' => ['manage-visits','visits-create', 'visits-edit', 'visits-view', 'visits-delete'],
             'icon' => 'fa fa-fw fa-list text-info',
             // 'label' => 4,
             // 'label_color' => 'success',
@@ -328,12 +328,14 @@ return [
         [
             'text' => 'Visitor Master',
             'url' => 'visitors',
-            'icon' => 'fa fa-fw fa-user text-person',
+            'can' => ['manage-visitors','visitors-view','visitors-create','visitors-edit','visitors-delete'],
+            'icon' => 'fa fa-fw fa-user text-info',
 
         ],
         [
             'text' => 'Employee Master',
             'url' => 'employees',
+            'can' => ['manage-employees','employees-view','employees-create','employees-edit','employees-delete'],
             'icon' => 'fa fa-fw fa-user text-info',
 
         ],
@@ -364,6 +366,7 @@ return [
         [
             'text' => 'Roleds & Permissions',
             'url' => 'roles-and-permissions',
+            'can' => 'manage-roles',
             'icon' => 'fas fa-fw fa-lock text-danger',
         ],
         // [

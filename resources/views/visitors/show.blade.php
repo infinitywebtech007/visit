@@ -13,21 +13,15 @@
 
                     <div class="col-sm-5">
                         <p class="card-text mb-0"><strong>Sr:</strong> {{ $visitor?->id }}</p>
-
                         <p class="card-text mb-0"><strong>Name of Visitor:</strong> {{ $visitor->name }}</p>
-                        <p class="card-text mb-0"><strong>From Company :</strong>
-                            {{ $visitor->company_name ?? 'N/A' }}</p>
+                        <p class="card-text mb-0"><strong>From Company :</strong>{{ $visitor->company_name ?? 'N/A' }}</p>
                         <p class="card-text mb-0"><strong>ID Proof Document :</strong> {{ $visitor->id_proof }}</p>
                     </div>
                     <div class="col-sm-5">
-                        <p class="card-text mb-0 "><strong>Added On:</strong> {{ $visitor?->created_at->format('Y-m-d') }}
-                        </p>
+                        <p class="card-text mb-0 "><strong>Added On:</strong> {{ $visitor?->created_at->format('Y-m-d') }}</p>
                         <p class="card-text mb-0 "><strong>From Location :</strong> {{ $visitor->address }}</p>
-                        <p class="card-text mb-0 "><strong>Contact Number :</strong> {{ $visitor->mobile ?? 'N/A' }}
-                        </p>
-                        <p class="card-text mb-0 "><strong>ID Proof Number :</strong>
-                            {{ $visitor->id_proof_number ?? 'N/A' }}</p>
-
+                        <p class="card-text mb-0 "><strong>Contact Number :</strong> {{ $visitor->mobile ?? 'N/A' }}</p>
+                        <p class="card-text mb-0 "><strong>ID Proof Number :</strong>{{ $visitor->id_proof_number ?? 'N/A' }}</p>
                     </div>
                     <div class="col-sm-2">
                         <p class="card-text"><strong>Photo of Visitor:</strong> <img class="img-fluid w-100"
