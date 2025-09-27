@@ -366,7 +366,7 @@ return [
         [
             'text' => 'Roleds & Permissions',
             'url' => 'roles-and-permissions',
-            'can' => 'manage-roles',
+            'can' => 'manage-roles-and-permissions',
             'icon' => 'fas fa-fw fa-lock text-danger',
         ],
         // [
