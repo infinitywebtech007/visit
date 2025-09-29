@@ -7,8 +7,6 @@
 
 -> Dashboard ChartJS Integration
 
--> View Password option 
-
 -> All views should have card like Visitor Master
 
 -> All DataTables in LIFO format
