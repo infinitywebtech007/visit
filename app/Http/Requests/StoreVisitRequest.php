@@ -24,12 +24,14 @@ class StoreVisitRequest extends FormRequest
         return [
             'visitor_id' => 'nullable',
             'visitor_mobile' => 'nullable',
-
             'employee_id' => 'nullable',
             'purpose' => 'nullable|string|max:20',
             'HOD' => 'nullable|string|max:500',
             'prebooked' => 'nullable',
             'visit_date' => 'nullable|date',
+            'booking_date' => 'nullable|date',
+            'in_time' => 'nullable|date',
+            'out_time' => 'nullable|date',
             'id_proof_number' => 'nullable|string|max:50',
         ];
     }

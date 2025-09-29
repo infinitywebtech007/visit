@@ -8,16 +8,10 @@
             <div class="row">
                 <div class="col-sm-12 col-md-6">
                     <div class="mb-3">
-                       <label for="visitor_id" class="label">Search by Number</label>
-                        <input type="text" 
-                               name="visitor_number" 
-                               id="visitor_number" 
-                               class="form-control" 
-                               v-model="visitorNumber" 
-                               @input="handleVisitorNumberInput"
-                               maxlength="10"
-                               pattern="[0-9]{10}"
-                               placeholder="Enter 10-digit mobile number">
+                        <label for="visitor_id" class="label">Search by Number</label>
+                        <input type="text" name="visitor_number" id="visitor_number" class="form-control"
+                            v-model="visitorNumber" @input="handleVisitorNumberInput" maxlength="10" pattern="[0-9]{10}"
+                            placeholder="Enter 10-digit mobile number">
                         <small v-if="visitorNumberError" class="text-danger">@{{ visitorNumberError }}</small>
                     </div>
                 </div>
@@ -45,12 +39,18 @@
                     <label for="purpose" class="form-label">Purpose</label>
                     <input type="text" name="purpose" id="purpose" class="form-control" value="{{ old('purpose') }}">
                 </div>
-                    {{-- <div class="col-sm-12 col-md-6 col-lg-4 form-check">
-                    <label for="&nbsp" class="label">&nbsp</label>
-                    <input type="checkbox" name="prebooked" id="prebooked" class="form-check-input" value="1"
+                <div class="col-sm-12 col-md-6">
+                    
+                    <label for="&nbsp" class="form-label">&nbsp Is it pre booked </label><br>
+                    <input type="checkbox" name="prebooked" id="prebooked" v-model="prebooked" class="fo " value="1"
                         {{ old('prebooked') ? 'checked' : '' }}>
                     <label for="prebooked" class="form-check-label">Prebooked</label>
-                </div> --}}
+                </div>
+                <div class="col-sm-12 col-md-6" v-if="prebooked" >
+                    <label for="&nbsp" class="form-label">Booking Date</label>
+                    <input type="date" name="booking_date" id="booking_date" v-model="booking_date" class="form-control" >
+                </div>
+
                 <div class="col-sm-12">
                     <input type="submit" value="Submit" class="btn bg-teal mt-3 ">
                 </div>
@@ -60,8 +60,10 @@
     </div>
     {{-- <script src="https://unpkg.com/vue@3.5.21/dist/vue.esm-browser.js"></script>    --}}
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-       <script>
-        const { createApp } = Vue
+    <script>
+        const {
+            createApp
+        } = Vue
 
         createApp({
             data() {
@@ -71,7 +73,9 @@
                     visitorNumber: '',
                     selectedVisitor: '',
                     filteredVisitors: @json($visitors),
-                    visitorNumberError: ''
+                    visitorNumberError: '',
+                    prebooked:'',
+                    booking_date:''
                 }
             },
             computed: {
@@ -85,45 +89,45 @@
             methods: {
                 handleVisitorNumberInput(event) {
                     let value = event.target.value;
-                    
+
                     // Remove all non-numeric characters
                     value = value.replace(/\D/g, '');
-                    
+
                     // Limit to 10 digits
                     if (value.length > 10) {
                         value = value.slice(0, 10);
                     }
-                    
+
                     // Update the model
                     this.visitorNumber = value;
-                    
+
                     // Validate and show error
                     this.validateVisitorNumber();
-                    
+
                     // Filter visitors
                     this.filterVisitorsByNumber();
                 },
-                
+
                 validateVisitorNumber() {
                     if (this.visitorNumber === '') {
                         this.visitorNumberError = '';
                         return true;
                     }
-                    
+
                     if (this.visitorNumber.length !== 10) {
                         this.visitorNumberError = 'Mobile number must be exactly 10 digits';
                         return false;
                     }
-                    
+
                     if (!/^\d{10}$/.test(this.visitorNumber)) {
                         this.visitorNumberError = 'Mobile number must contain only numbers';
                         return false;
                     }
-                    
+
                     this.visitorNumberError = '';
                     return true;
                 },
-                
+
                 filterVisitorsByNumber() {
                     if (this.visitorNumber.trim() === '') {
                         // Show all visitors if no number entered
@@ -177,6 +181,6 @@
                 }
             }
         }).mount('#app')
-    </script>   
+    </script>
 @endsection
 

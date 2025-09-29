@@ -32,7 +32,7 @@
                         <td>{{ $visit->employee->user->name ?? 'N/A' }}</td>
                         <td>{{ $visit->purpose }}</td>
                         <td>{{ $visit->prebooked ? 'Yes' : 'No' }}</td>
-                        <td>{{ $visit->created_at->format('Y-m-d H:i') }}</td>
+                        <td>{{ $visit->in_time ?? '' }}</td>
                         <td>{{ $visit?->out_time ?? '' }}</td>
                         <td>
                             @if(is_null($visit?->out_time))
