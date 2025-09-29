@@ -2,7 +2,6 @@
 
 ->settings
 
--> Employee Edit Error
 
 -> Btn of every view should be similar
 
