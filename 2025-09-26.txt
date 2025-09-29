@@ -7,9 +7,6 @@
 
 -> Dashboard ChartJS Integration
 
--> Close default time prefilled
-
-
 -> View Password option 
 
 -> All views should have card like Visitor Master
