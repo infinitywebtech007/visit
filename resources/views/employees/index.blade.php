@@ -30,14 +30,14 @@
                             <td>{{ $employee->phone }}</td>
                             <td>{{ $employee->status }}</td>
                             <td>
-                                <a href="{{ route('employees.show', $employee) }}" class="btn btn-info btn-sm">View</a>
-                                <a href="{{ route('employees.edit', $employee) }}" class="btn btn-warning btn-sm">Edit</a>
+                                {{-- <a href="{{ route('employees.show', $employee) }}" class="btn btn-info btn-sm">View</a> --}}
+                                <a href="{{ route('employees.edit', $employee) }}" class="btn bg-teal btn-sm"><div class="fa fa-edit"></div></a>
                                 <form action="{{ route('employees.destroy', $employee) }}" method="POST"
                                     style="display:inline-block;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure?')"
-                                        class="btn btn-danger btn-sm">Delete</button>
+                                        class="btn btn-danger btn-sm"><div class="fa fa-trash"></div></button>
                                 </form>
                             </td>
                         </tr>

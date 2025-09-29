@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <a href="{{ route('employees.edit', $employee) }}" class="btn btn-warning mt-3">Edit</a>
+    <a href="{{ route('employees.edit', $employee) }}" class="btn btn-sm bg-teal mt-3">Edit</a>
     <a href="{{ route('employees.index') }}" class="btn btn-secondary mt-3">Back to List</a>
 </div>
 @endsection

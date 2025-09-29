@@ -26,7 +26,8 @@ class HomeController extends Controller
     {
         $openVisits = Visit::whereNull('out_time');
         $openVisitsCount = $openVisits->count();
+        $todayVisitsCount = Visit::whereDate('visit_date',date('Y-m-d'))->count();
         $totalVisitsCountMonth = Visit::whereMonth('created_at','=',date('m'))->whereYear('created_at','=',date('Y'))->count();
-        return view('home',['openVisitsCount'=>$openVisitsCount,'totalVisitsCountMonth'=>$totalVisitsCountMonth]);
+        return view('home',['openVisitsCount'=>$openVisitsCount,'totalVisitsCountMonth'=>$totalVisitsCountMonth, 'todayVisitsCount'=>$todayVisitsCount]);
     }
 }

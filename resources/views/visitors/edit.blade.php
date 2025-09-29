@@ -52,11 +52,12 @@
             <label for="id_proof" class="form-label">ID Proof</label>
             <input type="text" name="id_proof" id="id_proof" class="form-control" value="{{ old('id_proof', $visitor->id_proof) }}">
         </div>
-
         <div class="mb-3">
-            <label for="id_proof_img" class="form-label">ID Proof Image URL</label>
-            <input type="text" name="id_proof_img" id="id_proof_img" class="form-control" value="{{ old('id_proof_img', $visitor->id_proof_img) }}">
+            <label for="id_proof_number" class="form-label">ID Proof Number</label>
+            <input type="text" name="id_proof_number" id="id_proof_number" class="form-control" value="{{ old('id_proof_number', $visitor->id_proof_number) }}">
         </div>
+
+        
 
         <button type="submit" class="btn btn-primary">Update Visitor</button>
         <a href="{{ route('visitors.index') }}" class="btn btn-secondary">Cancel</a>

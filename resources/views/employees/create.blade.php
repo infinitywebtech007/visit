@@ -55,12 +55,6 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="profile_photo_path" class="form-label">Profile Photo URL (optional)</label>
-                                <input type="text" name="profile_photo_path" id="profile_photo_path" class="form-control"
-                                    value="{{ old('profile_photo_path') }}">
-                            </div>
-
-                            <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
                                 <select name="status" id="status" class="form-control">
                                     <option value="active" {{ old('status') == 'active' ? 'selected' : '' }}>Active</option>

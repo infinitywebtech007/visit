@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Visits</h1>
+        <h1>List of Visits</h1>
         @haspermission('visits-create')
             <a href="{{ route('visits.create') }}" class="btn bg-teal mb-3">Create</a>
         @endhaspermission

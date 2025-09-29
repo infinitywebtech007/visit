@@ -12,6 +12,10 @@
         .page {
             width : 100%;
         }
+
+        td {
+            padding : 5px;
+        }
     </style>
 </head>
 @php
@@ -72,9 +76,9 @@
                 <td colspan="4">
                     <table border="0" style="width:100%;border: 0px solid transparent;border-collapse:collapse ">
                         <tr>
-                            <td style="text-align:center;" >Security Sign <br> &nbsp;<br> &nbsp; </td>
-                            <td style="text-align:center;" >Visitor's Sign <br> &nbsp;<br> &nbsp; </td>
-                            <td style="text-align:center;" >Employee's Sign <br> &nbsp;<br> &nbsp; </td>
+                            <td style="text-align:center;" > <br> &nbsp;<br> &nbsp; <br> &nbsp;<br> &nbsp; Security Sign</td>
+                            <td style="text-align:center;" > <br> &nbsp;<br> &nbsp; <br> &nbsp;<br> &nbsp; Visitor's Sign</td>
+                            <td style="text-align:center;" > <br> &nbsp;<br> &nbsp; <br> &nbsp;<br> &nbsp; Employee's Sign</td>
                         </tr>
                     </table>
                 </td>

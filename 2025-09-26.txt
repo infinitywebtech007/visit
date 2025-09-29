@@ -1,5 +1,20 @@
--> Dashboard show Open Pass only ('Close Now','Close'-> popup to select time, fetch date from VisitDate)
 
 
+->settings
 
--> 
+-> Employee Edit Error
+
+-> Btn of every view should be similar
+
+-> Dashboard ChartJS Integration
+
+-> Close default time prefilled
+
+
+-> View Password option 
+
+-> All views should have card like Visitor Master
+
+-> All DataTables in LIFO format
+
+-> Logo in Settings and card view
