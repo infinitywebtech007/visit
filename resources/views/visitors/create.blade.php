@@ -370,39 +370,35 @@
                                         <label for="name">
                                             <i class="fas fa-user"></i> Full Name <span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="name" id="name" class="form-control"
+                                        <input required type="text" name="name" id="name" class="form-control"
                                                value="{{ old('name') }}" required placeholder="Enter visitor's full name">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="email">
-                                            <i class="fas fa-envelope"></i> Email Address
-                                        </label>
-                                        <input type="email" name="email" id="email" class="form-control"
+                                            <i class="fas fa-envelope"></i>Email Address<span class="text-danger">*</span></label>
+                                        <input required type="email" name="email" id="email" class="form-control"
                                                value="{{ old('email') }}"  placeholder="visitor@example.com">
                                     </div>
 
                                     <div class="form-group">
                                         <label for="mobile">
-                                            <i class="fas fa-phone"></i> Mobile Number
-                                        </label>
-                                        <input type="text" name="mobile" id="mobile" class="form-control"
+                                            <i class="fas fa-phone"></i> Mobile Number<span class="text-danger">*</span></label>
+                                        <input required type="text" name="mobile" id="mobile" class="form-control"
                                                value="{{ old('mobile') }}" placeholder="+1 (555) 123-4567">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="address">
-                                        <i class="fas fa-map-marker-alt"></i> Address
-                                    </label>
-                                    <textarea name="address" id="address" class="form-control"
+                                        <i class="fas fa-map-marker-alt"></i> Address<span class="text-danger">*</span></label>
+                                    <textarea required name="address" id="address" class="form-control"
                                               placeholder="Enter visitor's complete address">{{ old('address') ?? '' }}</textarea>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="company_name">
-                                        <i class="fas fa-building"></i> Company Name
-                                    </label>
+                                        <i class="fas fa-building"></i>Company Name<span class="text-danger">*</span></label>
                                     <input type="text" name="company_name" id="company_name" class="form-control"
                                            value="{{ old('company_name') }}" placeholder="Company name (optional)">
                                 </div>
@@ -411,13 +407,13 @@
                             <!-- Camera Capture Section -->
                             <div class="camera-section">
                                 <div class="section-title">
-                                    <i class="fas fa-camera"></i> Photo & ID Capture
+                                    <i class="fas fa-camera"></i> Photo & ID Capture<span class="text-danger">*</span>
                                 </div>
 
                                 <div class="camera-grid">
                                     <!-- Visitor Photo Camera -->
                                     <div class="camera-item">
-                                        <h5><i class="fas fa-user"></i> Visitor Photo</h5>
+                                        <h5><i class="fas fa-user"></i> Visitor Photo<span class="text-danger">*</span></h5>
                                         <video id="video" class="camera-video" width="640" height="480" autoplay muted></video>
 
                                         <div class="camera-controls">
@@ -450,7 +446,7 @@
 
                                     <!-- ID Proof Camera -->
                                     <div class="camera-item">
-                                        <h5><i class="fas fa-id-card"></i> ID Proof Photo</h5>
+                                        <h5><i class="fas fa-id-card"></i> ID Proof Photo<span class="text-danger">*</span></h5>
                                         <video id="idVideo" class="camera-video" width="640" height="480" autoplay muted></video>
 
                                         <div class="camera-controls">
@@ -492,9 +488,9 @@
                                 <div class="form-row">
                                     <div class="form-group">
                                         <label for="id_proof">
-                                            <i class="fas fa-file-alt"></i> ID Proof Type
+                                            <i class="fas fa-file-alt"></i> ID Proof Type<span class="text-danger">*</span>
                                         </label>
-                                        <select name="id_proof" class="form-control" id="id_proof">
+                                        <select required name="id_proof" class="form-control" id="id_proof">
                                             <option value="" selected disabled>-- Select ID Type --</option>
                                             <option value="aadhaar_card" {{ old('id_proof') == 'aadhaar_card' ? 'selected' : '' }}>
                                                 Aadhaar Card
@@ -510,9 +506,9 @@
 
                                     <div class="form-group">
                                         <label for="id_proof_number">
-                                            <i class="fas fa-hashtag"></i> ID Proof Number
+                                            <i class="fas fa-hashtag"></i> ID Proof Number<span class="text-danger">*</span>
                                         </label>
-                                        <input type="text" name="id_proof_number" id="id_proof_number" class="form-control"
+                                        <input required type="text" name="id_proof_number" id="id_proof_number" class="form-control"
                                                value="{{ old('id_proof_number') }}" placeholder="Enter ID number">
                                     </div>
                                 </div>
@@ -528,8 +524,8 @@
                                 </a>
                             </div>
 
-                            <input type="hidden" name="webcam_photo" id="webcam_photo">
-                            <input type="hidden" name="webcam_id_photo" id="webcam_id_photo">
+                            <input required type="" class="d-none" name="webcam_photo" id="webcam_photo">
+                            <input required type="" class="d-none" name="webcam_id_photo" id="webcam_id_photo">
                         </form>
                     </div>
                 </div>

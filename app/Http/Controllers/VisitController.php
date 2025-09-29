@@ -7,6 +7,7 @@ use App\Models\Visitor;
 use App\Models\Employee;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 use Intervention\Image\ImageManager;
@@ -110,5 +111,12 @@ class VisitController extends Controller
         
         $pdf = app('dompdf.wrapper')->loadView('visits.print', compact('visit'), ['src' => $src]);
         return $pdf->stream('visit_' . $visit->id . '.pdf');
+    }
+
+    public function close(Visit $visit)
+    {
+        $visit->outTime = Carbon::now();
+
+        return redirect()->route('visits.index')->with('success', 'Visit closed successfully.');
     }
 }

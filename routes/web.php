@@ -15,13 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes([
+    'register' => false, // Disable registration route
+    'reset' => false,    // Disable password reset route
+    'verify' => false,   // Disable email verification route
+]);
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('employees', EmployeeController::class);
     Route::resource('security-guards', SecurityGuardController::class);
     Route::resource('settings', SettingController::class);
     Route::resource('visits', VisitController::class);
+    Route::post('/visits/close/{visit}', [VisitController::class, 'close'])->name('visits.close');
     Route::get('/visit-print/{visit}', [VisitController::class, 'print'])->name('visits.print');
     Route::resource('users', UserController::class);
     Route::resource('reports', ReportController::class);

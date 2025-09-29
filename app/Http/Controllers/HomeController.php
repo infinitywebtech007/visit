@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $openVisits = Visit::whereNull('out_time');
+        $openVisitsCount = $openVisits->count();
+        $totalVisitsCountMonth = Visit::whereMonth('created_at','=',date('m'))->whereYear('created_at','=',date('Y'))->count();
+        return view('home',['openVisitsCount'=>$openVisitsCount,'totalVisitsCountMonth'=>$totalVisitsCountMonth]);
     }
 }
