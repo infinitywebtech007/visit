@@ -16,6 +16,9 @@ class Visit extends Model
         'purpose',
         'HOD',
         'prebooked',
+        'in_time',
+        'out_time',
+        'visit_date',
     ];
 
     public function scopeOpen($query)

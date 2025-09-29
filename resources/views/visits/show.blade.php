@@ -13,20 +13,23 @@
 
                     <div class="col-sm-5">
                         <p class="card-text mb-0"><strong>Sr:</strong> {{ $visit->id }}</p>
-                        <p class="card-text mb-0"><strong>In Time:</strong> {{ $visit->created_at->format('H:i:s') }}</p>
+                        <p class="card-text mb-0"><strong>In Time:</strong> {{ $visit->created_at }}</p>
                         <p class="card-text mb-0"><strong>Name of Visitor:</strong> {{ $visit->visitor->name }}</p>
                         <p class="card-text mb-0"><strong>From Company :</strong>
                             {{ $visit->visitor->company_name ?? 'N/A' }}</p>
                         <p class="card-text mb-0"><strong>Purpose of Meeting :</strong> {{ $visit->purpose }}</p>
                         <p class="card-text mb-0"><strong>ID Proof Document :</strong> {{ $visit->visitor->id_proof }}</p>
+                        <p class="card-text mb-0"><strong>Scheduled :</strong> {{ $visit->prebooked ? 'Yes' : 'No' }}</p>
                     </div>
                     <div class="col-sm-5">
-                        <p class="card-text mb-0 "><strong>Date:</strong> {{ $visit->created_at->format('Y-m-d') }}</p>
-                        <p class="card-text mb-0 "><strong>OutTime:</strong> {{ $visit->out_time?->format('H:i:s') ?? '-' }}
+                        <p class="card-text mb-0 "><strong>Created on:</strong> {{ $visit->created_at }}</p>
+                        <p class="card-text mb-0 "><strong>OutTime:</strong> {{ $visit->out_time ?? '-' }}
                         </p>
                         <p class="card-text mb-0"><strong>Whom to Meet :</strong> {{ $visit->employee->user->name }}</p>
                         <p class="card-text mb-0 "><strong>From Location :</strong> {{ $visit->visitor->address }}</p>
                         <p class="card-text mb-0 "><strong>Contact Number :</strong> {{ $visit->visitor->mobile ?? 'N/A' }}
+                        <p class="card-text mb-0 "><strong>Sheduled Date :</strong> {{ $visit->visit_date ?? 'N/A' }}
+
                         </p>
                         <p class="card-text mb-0 "><strong>ID Proof Number :</strong>
                             {{ $visit->visitor->id_proof_number ?? 'N/A' }}</p>

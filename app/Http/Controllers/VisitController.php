@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Imagick\Driver;
+use Illuminate\Http\Request;
 
 class VisitController extends Controller
 {
@@ -39,7 +40,38 @@ class VisitController extends Controller
      */
     public function store(StoreVisitRequest $request)
     {
-        Visit::create($request->validated());
+        if($request->prebooked){
+            $request->merge([
+                'in_time' => Carbon::parse($request->booking_time)->format('H:i:s'), 
+            ]);
+        }
+        else{
+            $request->merge([
+                'in_time' => Carbon::now()->format('H:i:s'),
+            ]);
+        }
+        // dd($request->all());
+        if($request->prebooked=='1'){
+            $in_time= $request->booking_time;
+            $visit_date= $request->booking_date;
+        }
+        else{
+            $in_time= Carbon::now()->format('H:i:s');
+            $visit_date= Carbon::now()->format('Y-m-d');
+        }
+        Visit::create([
+            'visitor_id' => $request->visitor_id,
+
+            'employee_id' => $request->employee_id,
+            'purpose' => $request->purpose,
+            'HOD' => $request->HOD,
+            'prebooked' => $request->prebooked,
+            'visit_date' => $visit_date,
+            // 'booking_time' => $request->booking_time,
+            'in_time' => $in_time,
+            // 'out_time' => $request->out_time,
+            'id_proof_number' => $request->id_proof_number,
+        ]);
         return redirect()->route('visits.index')->with('success', 'Visit created successfully.');
     }
 
@@ -113,9 +145,10 @@ class VisitController extends Controller
         return $pdf->stream('visit_' . $visit->id . '.pdf');
     }
 
-    public function close(Visit $visit)
+    public function close(Request $request, Visit $visit)
     {
-        $visit->outTime = Carbon::now();
+        $visit->out_time = $request->out_time ?? Carbon::now();
+        $visit->save();
 
         return redirect()->route('visits.index')->with('success', 'Visit closed successfully.');
     }

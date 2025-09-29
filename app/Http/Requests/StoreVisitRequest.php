@@ -30,8 +30,10 @@ class StoreVisitRequest extends FormRequest
             'prebooked' => 'nullable',
             'visit_date' => 'nullable|date',
             'booking_date' => 'nullable|date',
-            'in_time' => 'nullable|date',
-            'out_time' => 'nullable|date',
+            'booking_time' => 'nullable',
+            'visit_date' => 'nullable|date',
+            'in_time' => 'nullable',
+            'out_time' => 'nullable',
             'id_proof_number' => 'nullable|string|max:50',
         ];
     }

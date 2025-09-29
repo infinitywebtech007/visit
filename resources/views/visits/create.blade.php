@@ -3,6 +3,7 @@
 @section('content')
     <div class="container" id="app">
         <h1>Create Pass</h1>
+        
         <form action="/visits" method="post">
             @csrf
             <div class="row">
@@ -41,14 +42,18 @@
                 </div>
                 <div class="col-sm-12 col-md-6">
                     
-                    <label for="&nbsp" class="form-label">&nbsp Is it pre booked </label><br>
+                    <label for="&nbsp" class="form-label">&nbsp Schedule Meeting ? </label><br>
                     <input type="checkbox" name="prebooked" id="prebooked" v-model="prebooked" class="fo " value="1"
                         {{ old('prebooked') ? 'checked' : '' }}>
-                    <label for="prebooked" class="form-check-label">Prebooked</label>
+                    <label for="prebooked" class="form-check-label">Yes</label>
                 </div>
                 <div class="col-sm-12 col-md-6" v-if="prebooked" >
                     <label for="&nbsp" class="form-label">Booking Date</label>
                     <input type="date" name="booking_date" id="booking_date" v-model="booking_date" class="form-control" >
+                </div>
+                <div class="col-sm-12 col-md-6" v-if="prebooked" >
+                    <label for="&nbsp" class="form-label">Booking Time</label>
+                    <input type="time" name="booking_time" id="booking_time" v-model="booking_time" class="form-control" >
                 </div>
 
                 <div class="col-sm-12">
@@ -75,7 +80,8 @@
                     filteredVisitors: @json($visitors),
                     visitorNumberError: '',
                     prebooked:'',
-                    booking_date:''
+                    booking_date:'',
+                    booking_time:''
                 }
             },
             computed: {

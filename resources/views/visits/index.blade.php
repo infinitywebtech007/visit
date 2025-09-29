@@ -74,10 +74,14 @@
             </tbody>
         </table>
         <x-adminlte-modal id="closeVisit" title="Visits">
-            <p id="visitCloseTitle">confirm visits close</p>
+            <p id="visitCloseTitle">Set out time for visit</p>
             <form action="/visits/{{ $id ?? '' }}" id="visitCloseForm" method="post">
                 @csrf
-                <input type="submit" class="btn bg-teal" value="Close">
+                <div class="mb-3">
+                    <label for="out_time" class="form-label">Out Time</label>
+                    <input type="time" name="out_time" id="out_time" value="{{ date('H:i') }}" class="form-control" required>
+                </div>
+                <input type="submit" class="btn bg-teal" value="Set Out Time">
             </form>
             <x-slot name="footerSlot">
             </x-slot>
@@ -100,11 +104,13 @@
             // Update the modal's content.
             var visitCloseTitle = visitClose.querySelector('#visitCloseTitle')
             var visitCloseForm = visitClose.querySelector('#visitCloseForm')
+            var outTimeInput = visitClose.querySelector('#out_time')
 
             var formUrl = '/visits/close/' + visitId
 
-            visitCloseTitle.textContent = 'Close Visit for ' + visitorName + ' ( Visit ID : ' + visitId + ')'
+            visitCloseTitle.textContent = 'Set Out Time for ' + visitorName + ' ( Visit ID : ' + visitId + ')'
             visitCloseForm.action = formUrl
+            outTimeInput.value = new Date().toISOString().slice(0, 16)
         })
     </script>
 @endpush
