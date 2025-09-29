@@ -110,7 +110,9 @@
 
             visitCloseTitle.textContent = 'Set Out Time for ' + visitorName + ' ( Visit ID : ' + visitId + ')'
             visitCloseForm.action = formUrl
-            outTimeInput.value = new Date().toISOString().slice(0, 16)
+            const now = new Date();
+            const tzTime = new Date(now.getTime() );
+            outTimeInput.value = tzTime.getHours().toString().padStart(2, '0') + ':' + tzTime.getMinutes().toString().padStart(2, '0');
         })
     </script>
 @endpush
