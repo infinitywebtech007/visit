@@ -378,7 +378,7 @@ return [
             'icon' => 'fas fa-fw fa-key text-warning',
         ],
         [
-            'text' => 'Roleds & Permissions',
+            'text' => 'Roles & Permissions',
             'url' => 'roles-and-permissions',
             'can' => 'manage-roles-and-permissions',
             'icon' => 'fas fa-fw fa-lock text-danger',
