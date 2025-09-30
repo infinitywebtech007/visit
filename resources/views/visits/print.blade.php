@@ -28,7 +28,7 @@
         <table width="100%" >
             <tr>
                 <td width="15%" >
-                    <img style="display:inline-block;max-height:200px;max-width:200px"  src="{{ $logo_src }}"
+                    <img style="display:inline-block;max-height:100px;max-width:100px"  src="{{ $logo_src }}"
                         alt="">
                 </td>
                 <td >
