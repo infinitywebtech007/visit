@@ -1,8 +1,1 @@
-
 -> Dashboard ChartJS Integration
-
--> All DataTables in LIFO format
-
--> Logo in Settings and card view
-
--> Settings View

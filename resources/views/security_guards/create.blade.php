@@ -47,7 +47,7 @@
                                 <input type="text" name="company" id="company" class="form-control"
                                     value="{{ old('company') }}">
                             </div>
-                            <button type="submit" class="btn btn-primary">Add Security Guard</button>
+                            <button type="submit" class="btn bg-teal">Add Security Guard</button>
                             <a href="{{ route('security-guards.index') }}" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>

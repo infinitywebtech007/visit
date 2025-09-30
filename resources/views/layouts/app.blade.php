@@ -38,12 +38,12 @@
 
 @section('footer')
     <div class="float-right d-print-none">
-        Version: {{ config('app.version', '1.0.0') }}
+        Version: {{ config('adminlte.version', '1.0.0') }}
     </div>
 
     <strong class=" d-print-none    ">
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
+        <a href="{{ env('APP_URL', '#') }}">
+            {{ config('adminlte.title', 'My company') }}
         </a>
     </strong>
 @stop

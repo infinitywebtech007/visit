@@ -20,9 +20,10 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <table class="table table-bordered" id=myTable>
+                        <table class="table table-bordered" id="myTable">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Mobile</th>
@@ -33,6 +34,7 @@
                             <tbody>
                                 @foreach ($visitors as $visitor)
                                     <tr>
+                                        <td>{{ $visitor->id }}</td>
                                         <td>{{ $visitor->name }}</td>
                                         <td>{{ $visitor->email }}</td>
                                         <td>{{ $visitor->mobile ?: 'N/A' }}</td>
@@ -107,7 +109,6 @@
             ]
         });
     </script> --}}
-
     <script>
         $(document).ready(function() {
             let table = new DataTable('#myTable', {
@@ -134,7 +135,8 @@
                     'copy', 'excel', 'pdf'
                 ],
                 pageLength: 10,
-                responsive: true
+                responsive: true,
+                order: [[0, 'desc']]
             });
 
             new DataTable.Buttons(table, {
