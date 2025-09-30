@@ -22,7 +22,7 @@ class StoreSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'key' => 'required|string|unique:settings,key',
+            'key' => 'nullable|string|unique:settings,key',
             'value' => 'nullable|string',
         ];
     }

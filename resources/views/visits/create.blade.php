@@ -82,7 +82,7 @@
                     selectedVisitor: '',
                     filteredVisitors: @json($visitors),
                     visitorNumberError: '',
-                    prebooked:'',
+                    prebooked:'0',
                     booking_date:'',
                     booking_time:''
                 }

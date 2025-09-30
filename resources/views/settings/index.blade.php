@@ -13,26 +13,25 @@
     <div class="col-sm-12">
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Key </td>
-                        <td>Value  </td>
-                    </tr>
-                    @foreach ($settings ?? [] as $setting)
+                <form action="/settings"  method="post" enctype="multipart/form-data">
+                    @csrf
+                    <table class="table table-bordered">
                         <tr>
-                            <td>{{ $setting->key }}</td>
-                            <td><input type="text" class="form-control" value="{{ $setting->value }}" ></td>
+                            <td>Key </td>
+                            <td>Value  </td>
                         </tr>
-                    @endforeach
-                    <form action="" method="post">
-                        @csrf
-                        <tr>
-                            <td><input type="text" name="key" placeholde="Enter key"></td>
-                            <td><input type="text" name="value" placehoder="Enter value" >
-                            <input type="submit" value="save"></td>
-                        </tr>
-                    </form>
-                </table>
+                        @foreach ($settings ?? [] as $setting)
+                            <tr>
+                                
+                                <td><input type="text" readonly class="form-control" value="{{ $setting->key }}" ></td>
+                                <td><input type="text" class="form-control" name="{{ $setting->key }}" value="{{ $setting->value }}" ></td>
+                            </tr>
+                        @endforeach
+                                <td><img style="max-width:50px;max-height:50px" src="" /></td>
+                                <td><input type="file" name="print_pass_logo" id="" class="form-control"></td>
+                    </table>
+                    <input type="submit" value="Save" class="btn bg-teal">
+                </form>
             </div>
         </div>
     </div>

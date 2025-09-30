@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Setting;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -15,6 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $setting = Setting::create([
+            'key'=>'print_visit_pass_header',
+            'value'=>'VMS']);
+        $setting->save();
+
         $role= Role::create(['name'=>'security-guard']);
         $role= Role::create(['name'=>'employee']);
         $role= Role::create(['name'=>'manager']);

@@ -6,6 +6,9 @@ use App\Models\Setting;
 use App\Http\Requests\StoreSettingRequest;
 use App\Http\Requests\UpdateSettingRequest;
 
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Storage;
+
 class SettingController extends Controller
 {
     /**
@@ -31,6 +34,13 @@ class SettingController extends Controller
      */
     public function store(StoreSettingRequest $request)
     {
+        Setting::set('print_visit_pass_header', $request->input('print_visit_pass_header','VMS'));
+
+        
+        if ($request->print_pass_logo) {
+            $request->file('print_pass_logo')->storeAs('print_pass_logo.png');
+        }
+        return redirect()->route('settings.index')->with('success', 'Settings saved.');
          Setting::set($request->key, $request->value);
          Setting::updateOrInsert(['key' => $request->key], ['value' => $request->value]);
          Setting::getCollection(); // refresh cache

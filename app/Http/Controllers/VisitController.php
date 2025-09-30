@@ -7,6 +7,7 @@ use App\Models\Visitor;
 use App\Models\Employee;
 use App\Http\Requests\StoreVisitRequest;
 use App\Http\Requests\UpdateVisitRequest;
+use App\Models\Setting;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -114,34 +115,28 @@ class VisitController extends Controller
 
     function print(Visit $visit)
     {
-        // create new image instance
-        // $manager = new ImageManager(Driver::class);
         
+        $filePath = 'print_pass_logo.png';
+        $logo_file=Storage::get($filePath);
+        $base64 = base64_encode($logo_file);   
+    
+        $logo_src = 'data:image/png;base64,' . $base64;   
+
         
         $path = storage_path('app/private/visitors/webcam_photo/' . $visit->visitor->photo_url);
-        // $image = $manager->read($path); // 800 x 600
-        // dd($path,$visit->visitor->photo_url);
+
         if($visit->visitor->photo_url && file_exists($path)){
-            // $image = $manager->make($path); // 800 x 600
 
             $imageData = base64_encode(file_get_contents($path ?? ''));
             $src = 'data:' . mime_content_type($path) . ';base64,' . $imageData;
         }
         else{
-            // $src = asset('images/default_avatar.png');
             $src = '';
         }
-        
-        // dd($imageData);
-        // $image->scaleDown(width: 200); // 200 x 150
-        
-        // scale down to fixed height
-        // $image->scaleDown(height: 300); //  400 x 300
-        // echo '<img src="' . $src . '" alt="Description">';   
+
         $visit->load('visitor', 'employee', 'manager');
-        // return view('visits.print', compact('visit'));
-        
-        $pdf = app('dompdf.wrapper')->loadView('visits.print', compact('visit'), ['src' => $src]);
+
+        $pdf = app('dompdf.wrapper')->loadView('visits.print', compact('visit'), ['src' => $src,'logo_src'=>$logo_src]);
         return $pdf->stream('visit_' . $visit->id . '.pdf');
     }
 
