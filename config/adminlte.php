@@ -318,6 +318,13 @@ return [
         //     'text' => 'search',
         // ],
         [
+            'text' => 'Dashboard',
+            'url' => 'home',
+            // 'icon' => 'fa fa-fw fa-dashboard text-info',
+            // 'label' => 4,
+            // 'label_color' => 'success',
+        ],
+        [
             'text' => 'Create Visitor Pass',
             'url' => 'visits',
             'can' => ['manage-visits','visits-create', 'visits-edit', 'visits-view', 'visits-delete'],

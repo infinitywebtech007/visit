@@ -63,7 +63,7 @@
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Update Employee</button>
+                            <button type="submit" class="btn bg-teal">Update</button>
                             <a href="{{ route('employees.index') }}" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>

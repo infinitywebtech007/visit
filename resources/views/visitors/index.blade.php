@@ -2,9 +2,9 @@
 
 {{-- Customize layout sections --}}
 
-@section('subtitle', 'Welcome')
+@section('subtitle', 'Visitors')
 @section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('content_header_subtitle', 'Visitors')
 
 {{-- Content body: main page content --}}
 

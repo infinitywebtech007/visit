@@ -3,64 +3,67 @@
 @section('content')
     <div class="container" id="app">
         <h1>Create Pass</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/visits" method="post">
+                    @csrf
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="visitor_id" class="label">Search by Number</label>
+                                <input type="text" name="visitor_number" id="visitor_number" class="form-control"
+                                    v-model="visitorNumber" @input="handleVisitorNumberInput" maxlength="10" pattern="[0-9]{10}"
+                                    placeholder="Enter 10-digit mobile number">
+                                <small v-if="visitorNumberError" class="text-danger">@{{ visitorNumberError }}</small>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="mb-3">
+                                <label for="visitor_id" class="label">Search by Name</label>
+                                <select name="visitor_id" class="form-control" id="visitor_id" v-model="selectedVisitor">
+                                    <option value="">Select Visitor</option>
+                                    <option v-for="visitor in filteredVisitors" :key="visitor.id" :value="visitor.id">
+                                        @{{ visitor.name }} - @{{ visitor.phone || visitor.mobile }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3">
+                            <label for="attendant" class="form-label">To meet Employee</label>
+                            <select name="employee_id" id="attendant" class="form-control" required>
+                                <option value="">Select Employee</option>
+                                @foreach ($employees as $employee)
+                                    <option value="{{ $employee->id }}">{{ $employee->user->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-6 mb-3 col-lg-6">
+                            <label for="purpose" class="form-label">Purpose</label>
+                            <input type="text" name="purpose" id="purpose" class="form-control" value="{{ old('purpose') }}">
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-3">
+                            <label for="&nbsp" class="form-label">Schedule Meeting ? </label>
+                            <select name="prebooked" class="form-control" v-model="prebooked" id="prebooked">
+                                <option value="0" selected >No</option>
+                                <option value="1" >Yes</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-3" v-if="prebooked==1" >
+                            <label for="&nbsp" class="form-label">Booking Date</label>
+                            <input type="date" required name="booking_date" id="booking_date" v-model="booking_date" class="form-control" >
+                        </div>
+                        <div class="col-sm-12 col-md-4 mb-3" v-if="prebooked==1" >
+                            <label for="&nbsp" class="form-label">Booking Time</label>
+                            <input type="time" required name="booking_time" id="booking_time" v-model="booking_time" class="form-control" >
+                        </div>
         
-        <form action="/visits" method="post">
-            @csrf
-            <div class="row">
-                <div class="col-sm-12 col-md-6">
-                    <div class="mb-3">
-                        <label for="visitor_id" class="label">Search by Number</label>
-                        <input type="text" name="visitor_number" id="visitor_number" class="form-control"
-                            v-model="visitorNumber" @input="handleVisitorNumberInput" maxlength="10" pattern="[0-9]{10}"
-                            placeholder="Enter 10-digit mobile number">
-                        <small v-if="visitorNumberError" class="text-danger">@{{ visitorNumberError }}</small>
+                        <div class="col-sm-12">
+                            <input type="submit" value="Submit" class="btn bg-teal mt-3 ">
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <div class="mb-3">
-                        <label for="visitor_id" class="label">Search by Name</label>
-                        <select name="visitor_id" class="form-control" id="visitor_id" v-model="selectedVisitor">
-                            <option value="">Select Visitor</option>
-                            <option v-for="visitor in filteredVisitors" :key="visitor.id" :value="visitor.id">
-                                @{{ visitor.name }} - @{{ visitor.phone || visitor.mobile }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    <label for="attendant" class="form-label">To meet Employee</label>
-                    <select name="employee_id" id="attendant" class="form-control" required>
-                        <option value="">Select Employee</option>
-                        @foreach ($employees as $employee)
-                            <option value="{{ $employee->id }}">{{ $employee->user->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-6">
-                    <label for="purpose" class="form-label">Purpose</label>
-                    <input type="text" name="purpose" id="purpose" class="form-control" value="{{ old('purpose') }}">
-                </div>
-                <div class="col-sm-12 col-md-6">
-                    
-                    <label for="&nbsp" class="form-label">&nbsp Schedule Meeting ? </label><br>
-                    <input type="checkbox" name="prebooked" id="prebooked" v-model="prebooked" class="fo " value="1"
-                        {{ old('prebooked') ? 'checked' : '' }}>
-                    <label for="prebooked" class="form-check-label">Yes</label>
-                </div>
-                <div class="col-sm-12 col-md-6" v-if="prebooked" >
-                    <label for="&nbsp" class="form-label">Booking Date</label>
-                    <input type="date" name="booking_date" id="booking_date" v-model="booking_date" class="form-control" >
-                </div>
-                <div class="col-sm-12 col-md-6" v-if="prebooked" >
-                    <label for="&nbsp" class="form-label">Booking Time</label>
-                    <input type="time" name="booking_time" id="booking_time" v-model="booking_time" class="form-control" >
-                </div>
-
-                <div class="col-sm-12">
-                    <input type="submit" value="Submit" class="btn bg-teal mt-3 ">
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
 
     </div>
     {{-- <script src="https://unpkg.com/vue@3.5.21/dist/vue.esm-browser.js"></script>    --}}

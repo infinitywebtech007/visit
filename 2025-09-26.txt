@@ -1,14 +1,8 @@
 
-
-->settings
-
-
--> Btn of every view should be similar
-
 -> Dashboard ChartJS Integration
-
--> All views should have card like Visitor Master
 
 -> All DataTables in LIFO format
 
 -> Logo in Settings and card view
+
+-> Settings View

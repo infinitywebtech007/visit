@@ -43,7 +43,7 @@
                                 <input type="text" name="company" id="company" class="form-control"
                                     value="{{ old('company', $securityGuard->company) }}">
                             </div>  
-                            <button type="submit" class="btn btn-primary">Update Security Guard</button>
+                            <button type="submit" class="btn bg-teal">Update Security Guard</button>
                             <a href="{{ route('security-guards.index') }}" class="btn btn-secondary">Cancel</a>
                         </form>
                     </div>

@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <a href="{{ route('security-guards.edit', $securityGuard) }}" class="btn btn-warning mt-3">Edit</a>
+    <a href="{{ route('security-guards.edit', $securityGuard) }}" class="btn bg-teal mt-3"><div class="fa fa-edit"></div></a>
     <a href="{{ route('security-guards.index') }}" class="btn btn-secondary mt-3">Back to List</a>
 </div>
 @endsection

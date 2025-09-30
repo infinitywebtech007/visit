@@ -61,7 +61,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <input type="submit" value="Change" class="btn btn-success">
+                            <input type="submit" value="Change" class="btn bg-teal">
                         </form>
                     </div>
                 </div>

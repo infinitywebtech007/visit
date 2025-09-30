@@ -13,54 +13,53 @@
             </ul>
         </div>
     @endif
-
-    <form action="{{ route('visitors.update', $visitor) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $visitor->name) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $visitor->email) }}" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="mobile" class="form-label">Mobile</label>
-            <input type="text" name="mobile" id="mobile" class="form-control" value="{{ old('mobile', $visitor->mobile) }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
-            <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $visitor->address) }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="company_name" class="form-label">Company Name</label>
-            <input type="text" name="company_name" id="company_name" class="form-control" value="{{ old('company_name', $visitor->company_name) }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="photo_url" class="form-label">Photo URL</label>
-            <input type="text" name="photo_url" id="photo_url" class="form-control" value="{{ old('photo_url', $visitor->photo_url) }}">
-        </div>
-
-        <div class="mb-3">
-            <label for="id_proof" class="form-label">ID Proof</label>
-            <input type="text" name="id_proof" id="id_proof" class="form-control" value="{{ old('id_proof', $visitor->id_proof) }}">
-        </div>
-        <div class="mb-3">
-            <label for="id_proof_number" class="form-label">ID Proof Number</label>
-            <input type="text" name="id_proof_number" id="id_proof_number" class="form-control" value="{{ old('id_proof_number', $visitor->id_proof_number) }}">
-        </div>
-
+    <div class="card">
+        <div class="card-body">
+            <form action="{{ route('visitors.update', $visitor) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
         
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $visitor->name) }}" required>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email', $visitor->email) }}" required>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Mobile</label>
+                    <input type="text" name="mobile" id="mobile" class="form-control" value="{{ old('mobile', $visitor->mobile) }}">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" name="address" id="address" class="form-control" value="{{ old('address', $visitor->address) }}">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="company_name" class="form-label">Company Name</label>
+                    <input type="text" name="company_name" id="company_name" class="form-control" value="{{ old('company_name', $visitor->company_name) }}">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="id_proof" class="form-label">ID Proof</label>
+                    <input type="text" name="id_proof" id="id_proof" class="form-control" value="{{ old('id_proof', $visitor->id_proof) }}">
+                </div>
+                <div class="mb-3">
+                    <label for="id_proof_number" class="form-label">ID Proof Number</label>
+                    <input type="text" name="id_proof_number" id="id_proof_number" class="form-control" value="{{ old('id_proof_number', $visitor->id_proof_number) }}">
+                </div>
+        
+                
+        
+                <button type="submit" class="btn bg-teal">Update Visitor</button>
+                <a href="{{ route('visitors.index') }}" class="btn btn-secondary">Cancel</a>
+            </form>
 
-        <button type="submit" class="btn btn-primary">Update Visitor</button>
-        <a href="{{ route('visitors.index') }}" class="btn btn-secondary">Cancel</a>
-    </form>
+        </div>
+    </div>
 </div>
 @endsection
