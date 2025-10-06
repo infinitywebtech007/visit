@@ -29,7 +29,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Acquisitions Chart</h3>
+                        <h3 class="card-title">Bar Chart</h3>
                     </div>
                     <div class="card-body">
                         <canvas id="acquisitions"></canvas>
@@ -61,7 +61,7 @@
                     data: {
                         labels: data.map(row => row.date),
                         datasets: [{
-                            label: 'Acquisitions by year',
+                            label: 'Visits per date',
                             data: data.map(row => row.count),
                             backgroundColor: 'rgba(54, 162, 235, 0.5)',
                             borderColor: 'rgba(54, 162, 235, 1)',
@@ -73,6 +73,14 @@
                         maintainAspectRatio: true,
                         scales: {
                             y: {
+                                beginAtZero: true, // Start at zero
+                                min: 0, // Minimum value is 0 (bottom)
+                                max: 10, // Maximum value is 10 (top) - ensures at least 10 points on axis even if data max is low (e.g., 1)
+                                ticks: {
+                                    stepSize: 1 // Steps: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+                                }
+                            },
+                            x: {
                                 beginAtZero: true, // Start at zero
                                 min: 0, // Minimum value is 0 (bottom)
                                 max: 10, // Maximum value is 10 (top) - ensures at least 10 points on axis even if data max is low (e.g., 1)
